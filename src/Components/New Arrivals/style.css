@@ -1,0 +1,11 @@
+@media screen and (max-width:780px) {
+    .brands{
+        display: none;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .menu{
+        display: none;
+    }
+}

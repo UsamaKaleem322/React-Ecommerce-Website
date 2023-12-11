@@ -1,0 +1,25 @@
+.adds1{
+   background-image: url('/Images/banner1.jpg');
+   background-repeat: no-repeat;
+   padding: none;
+   transition: 0.3s ease-in;
+}
+.overlay{
+    background-image: linear-gradient(to right , rgba(0, 0, 0, 0.892),rgba(255, 255, 255, 0),rgba(255, 255, 255, 0));
+    padding: none;
+    transition: 0.3s ease-in;
+}
+
+
+.adds2{
+    background-image: url('/Images/banner2.jpg');
+    background-repeat: no-repeat;
+    padding: none;
+    transition: 0.3s ease-in;   
+ }
+.adds2 h3{
+    color:black;
+    background-color: yellow;
+    width: fit-content;
+    padding: 5px;
+}
