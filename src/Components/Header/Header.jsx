@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import CartModel from '../Cart/Cart';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { auth } from '../../Firebase/Firebase-config';
+import {signOut} from 'firebase/auth'
 function Header() {
   const [show, setShow] = useState(false);
   const handleShow = () => {
@@ -59,6 +61,10 @@ function Header() {
               </Nav>
               <span className='ms-5 text-light'><FaHeart style={{ fontSize: '23px', color: 'red' }} /></span>
               <Link onClick={() => handleShow()} className='ms-3 text-light'><FaCartShopping style={{ fontSize: '25px', color: 'red' }} /> <MDBBadge color='dark' className=' translate-middle rounded-circle' >{quantity}</MDBBadge></Link>
+              {auth.currentUser? 
+              <Link to={'/signin'}><button onClick={()=>signOut(auth)} className='btn btn-dark ms-5'>Logout</button></Link>:
+              <Link to={'/signin'}><button className='btn btn-dark ms-5'>Sign In</button></Link>}
+                
             </Navbar.Collapse>
           </>
         </Navbar>

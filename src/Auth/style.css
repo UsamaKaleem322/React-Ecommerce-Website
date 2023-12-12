@@ -1,0 +1,33 @@
+.login{
+  width:750px;
+  margin: auto;
+  border: 1px solid lightgray;
+  padding: 2%;
+}
+
+.login form{
+  border-right: 1px solid lightgray;
+}
+
+.login a{
+  position: relative;
+  float: right;
+}
+.login Button{
+  width: 100%;
+  margin: 15px 0px;
+  padding: 8px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0%;
+}
+
+.signup-bar{
+  width:750px;
+  margin: auto;
+  border: 1px solid lightgray;
+  padding: 1%;
+  background-color: #F2F2F2;
+  margin-bottom: 4%;
+}

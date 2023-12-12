@@ -36,8 +36,6 @@ const CartModel = ({ handleShow, openmodel }) => {
             )
           }):<p>No Cart Products Available</p> }
 
-
-
           <h5  >Total Price : ${totalPrice}</h5>
         </Offcanvas.Body>
       
