@@ -29,7 +29,7 @@ function Products() {
     const products = useSelector(state => state.products.allProducts)
     const topfourProducts = [...products].sort((a, b) => a.id > b.id ? 1 : -1)
     const lastfourProducts = [...products].sort((a, b) => a.id > b.id ? -1 : 1).slice(0,4)
-    
+    const Categories = [...new Set(products.map(item => item.category))];
     return (
         <>
             <Carouselbar title={'Featured Products'}/>
@@ -50,7 +50,7 @@ function Products() {
                         {topfourProducts.map((item) => {
                             return (
                                 <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2 " key={item.id}>
-                                    <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} />
+                                    <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category} />
                                 </div>
                             )
                         })}
@@ -81,7 +81,7 @@ function Products() {
                             {lastfourProducts.map((item) => {
                                 return (
                                     <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={item.id}>
-                                        <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} />
+                                        <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category}/>
                                     </div>
                                 )
                             })}
@@ -89,20 +89,14 @@ function Products() {
                     </div>
                 </div>
             </div>
-
+           
             <div className="container my-5">
                 <div className="row">
                     <div className="col-xl-3 featured2 text-center p-0">
                         <div className="content p-5 d-flex flex-column gap-2" >
-                            <h3 className='my-4' >Interior Parts</h3>
-                            <a href="#" >Dashboards</a>
-                            <a href="#">Seat Covers</a>
-                            <a href="#">Floor Mats</a>
-                            <a href="#">Sun Shades</a>
-                            <a href="#">Visors</a>
-                            <a href="#">Car Covers</a>
-                            <a href="#">Accessories</a>
-                            <Link to={'/shop'} className='btn btn-sm my-4' style={{ backgroundColor: '#E52727', color: 'white' }}>Shop All</Link>
+                            <h3 className='my-4' >Categories</h3>
+                            {Categories.map(item=> <a style={{color:'white'}}>{item}</a> )}
+                            <Link to={'/shop'} className='btn btn-sm my-4' style={{ backgroundColor: '#E52727', color: 'white' }}>See All</Link>
                         </div>
                     </div>
                     <div className="col-xl-9">
@@ -113,23 +107,40 @@ function Products() {
                             className="mb-3 tabs mt-1"
                             color='black'
                         >
-                            <Tab eventKey="featured" title="Featured" style={{ color: 'black' }}>
+                            {}
+                            <Tab eventKey="featured" title="Engine" style={{ color: 'black' }}>
                                 <div className="row cards">
                                     
-                                        {lastfourProducts.map((item, index) => {
+                                        {products.filter(product=>product.category=='Engine').map((item, index) => {
                                             return (
                                                 <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                                                    <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} />
+                                                    <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category} />
                                                 </div>
                                             )
                                         })}
                                 </div>
                             </Tab>
-                            <Tab eventKey="bestsellers" title="BestSellers">
-                                Tab content for Profile
+                            <Tab eventKey="bestsellers" title="Brake Kit">
+                            <div className="row cards">
+                                    {products.filter(product=>product.category=='Brake Kit').map((item, index) => {
+                                        return (
+                                            <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
+                                                <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category}/>
+                                            </div>
+                                        )
+                                    })}
+                            </div>
                             </Tab>
-                            <Tab eventKey="popular" title="Popular" >
-                                Tab content for Contact
+                            <Tab eventKey="popular" title="Weel" >
+                            <div className="row cards">
+                                    {products.filter(product=>product.category=='Weel').map((item, index) => {
+                                        return (
+                                            <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
+                                                <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category}/>
+                                            </div>
+                                        )
+                                    })}
+                            </div>
                             </Tab>
                         </Tabs>
 

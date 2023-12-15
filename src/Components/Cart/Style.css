@@ -1,0 +1,38 @@
+.cart-products{
+  margin: 5% 2%;
+  padding: 5%;
+}
+
+.heading{
+  display: flex;
+  justify-content: space-between;
+}
+.products-box{
+  padding: 0% 3%;
+}
+.product-img{
+  width:auto;
+  padding: 1%;
+}
+
+.title-row{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -20px;
+  margin-top:50px;
+}
+
+.price{
+  color: red;
+}
+.quantity{
+  margin-bottom: 0;
+}
+.product-card{
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.checkout{
+  background-color: black;
+}

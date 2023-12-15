@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { singleProduct } from '../../Features/ProductSlice';
 import { useDispatch, } from 'react-redux';
 
-const CardProduct = ({ id, name, img, text, price }) => {
+const CardProduct = ({ id, name, img, text, price ,category}) => {
   const dispatch = useDispatch()
   return (
     <>

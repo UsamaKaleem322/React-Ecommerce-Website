@@ -31,3 +31,10 @@
   background-color: #F2F2F2;
   margin-bottom: 4%;
 }
+
+.signin-form form{
+  width: 400px;
+  margin: auto;
+  padding: 2%;
+  box-shadow: 1px 1px 1px 1px;
+}
