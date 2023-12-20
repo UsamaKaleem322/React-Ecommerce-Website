@@ -1,20 +1,36 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {storedata} from '../Data/Dummydata';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getDocs, collection } from 'firebase/firestore';
+import { db } from '../Firebase/Firebase-config';
 
-export const productSlice=createSlice({
-  name:'products',
-  initialState:{
-    allProducts:storedata,
-    product:JSON.parse(localStorage.getItem('Product'))
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async (_, {  }) => {
+  const querySnapshot = await getDocs(collection(db, 'Products'));
+  const allProducts = [];
+  querySnapshot.forEach((doc) => {
+    const productData = doc.data();
+    allProducts.push(productData);
+  });
+  return allProducts;
+});
+
+export const productSlice = createSlice({
+  name: 'products',
+  initialState: {
+    allProducts: [],
+    product: JSON.parse(localStorage.getItem('Product')),
   },
-  reducers:{
-    singleProduct(state,action){
-      const product=storedata.filter(product=>product.id==action.payload);
-      localStorage.setItem('Product',JSON.stringify(product))
-      state.product=product;
-    }
-  }
-})
+  reducers: {
+    singleProduct(state, action) {
+      const product = state.allProducts.filter((product) => product.name === action.payload);
+      localStorage.setItem('Product', JSON.stringify(product));
+      state.product = product;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+      state.allProducts = action.payload;
+    });
+  },
+});
 
-export const {singleProduct}=productSlice.actions;
+export const { singleProduct, GetAllProduct } = productSlice.actions;
 export default productSlice.reducer;

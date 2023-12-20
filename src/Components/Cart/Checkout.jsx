@@ -10,14 +10,16 @@ import {
   MDBInput,
   MDBRow,
   MDBTypography,
+  MDBCheckbox
 } from "mdb-react-ui-kit";
 import { Link } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
+import { clearCart } from '../../Features/CartSlice';
 
 const Checkout = () => {
   const totalPrice = useSelector(state => state.cart.totalPrice);
-  
+  const dispatch=useDispatch()
   return (
     <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
     <MDBContainer className="py-5 h-100">
@@ -49,18 +51,9 @@ const Checkout = () => {
                     minLength="19" maxLength="19" placeholder="Phone..." contrast required />
                     <MDBInput className="mb-4" type="text" size="lg"
                     placeholder="Address" contrast required/>
-                  <MDBRow className="mb-4">
-                    <MDBCol md="6">
-                      <MDBInput className="mb-4" label="Expiration" type="text" size="lg"
-                        minLength="7" maxLength="7" placeholder="MM/YYYY" contrast required/>
-                    </MDBCol>
-                    <MDBCol md="6">
-                      <MDBInput className="mb-4" label="Cvv" type="text" size="lg" minLength="3"
-                        maxLength="3" placeholder="&#9679;&#9679;&#9679;" contrast />
-                    </MDBCol>
-                  </MDBRow>
+                    <MDBCheckbox name='flexCheck' value='' id='flexCheckChecked' label='Cash on Delievry' defaultChecked />
                   <Link to={'/shop'}>
-                  <button className='btn btn-primary'>Payment with Stripe</button>
+                  <button className='btn btn-primary my-4' onClick={()=>dispatch(clearCart())}>Submit</button>
                   </Link>
                   
                 </form>

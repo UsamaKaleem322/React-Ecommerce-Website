@@ -1,33 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
-import { RiFacebookBoxLine } from "react-icons/ri";
+import { FaFacebookF } from "react-icons/fa";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { auth, googleProvider, facebookProvider } from '../Firebase/Firebase-config';
 import { signInWithPopup } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
+
+
 const Socialbuttons = () => {
+  
   const navigate = useNavigate()
-  const SigninWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider)
-      navigate('/')
-    } catch (error) {
-      console.log(error.message);
+    const SigninWithGoogle = async () => {
+      try {
+        await signInWithPopup(auth, googleProvider)
+         localStorage.setItem('user',JSON.stringify(auth.currentUser) )
+        navigate('/')
+      } catch (error) {
+        console.log(error.message);
+      }
     }
-  }
-  const SigninWithFacebook = async () => {
-    try {
-      await signInWithPopup(auth, facebookProvider)
-      navigate('/')
-    } catch (error) {
-      console.log(error.message);
+    const SigninWithFacebook = async () => {
+      try {
+        await signInWithPopup(auth, facebookProvider)
+        navigate('/')
+      } catch (error) {
+        console.log(error.message);
+      }
     }
-  }
+  localStorage.setItem('user', JSON.stringify(auth.currentUser))
+    
   return (
     <>
-      <Button className='pb-2 border ' style={{ background: '#E52727' }} onClick={() => SigninWithGoogle()}><FaGoogle style={{ fontSize: '21px' }} /> Sign In with Google</Button>
-      <Button className='pb-2' onClick={() => SigninWithFacebook()}><RiFacebookBoxLine style={{ fontSize: '25px' }} /> Sign In with Facebook</Button>
-      <Button className='pb-2 btn-dark'><FaGithub style={{ fontSize: '23px' }} /> Sign In with Github</Button>
+    <div className="socialbuttons d-flex gap-3 justify-content-center">
+      <button className='btn btn-sm ' onClick={()=>SigninWithGoogle()} style={{backgroundColor:'red',color:"white",borderRadius:'50px'}}><FaGoogle style={{ fontSize: '23px' }} /></button>
+      <button className='btn btn-sm' style={{backgroundColor:'blue',color:"white",borderRadius:'100px' , }}><FaFacebookF onClick={()=>SigninWithFacebook()} style={{ fontSize: '23px' }} /></button>
+      </div>
     </>
   )
 }

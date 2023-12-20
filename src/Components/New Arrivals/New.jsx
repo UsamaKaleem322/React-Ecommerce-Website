@@ -17,10 +17,10 @@ const New = () => {
                         <div className='mt-1' style={{ border: '1px solid lightgray', width: '20rem' }}>
                             <div className="row">
                                 <div className="col-md-3 pt-2">
-                                    <img src={item.img} width={'100px'} alt="" />
+                                    <img src={item.image} width={'100px'} alt="" />
                                 </div>
                                 <div className="col-md-9 px-4 py-3">
-                                    <h6 >{item.name}</h6>
+                                    <h6 >{item.name.slice(0,40)}</h6>
                                     <div className="d-flex justify-content-between" style={{ marginTop: '-8px' }}>
                                         <div className="icons">
                                             <LiaStarSolid color='#FFD333' fontSize={'20px'} />

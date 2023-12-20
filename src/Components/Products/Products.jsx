@@ -1,13 +1,16 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux'
+import {useSelector } from 'react-redux'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardProduct from './Card';
 import Carouselbar from './Carouselbar';
 import './style.css'
+
+
 function Products() {
+    
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 3000 },
@@ -27,8 +30,7 @@ function Products() {
         }
     };
     const products = useSelector(state => state.products.allProducts)
-    const topfourProducts = [...products].sort((a, b) => a.id > b.id ? 1 : -1)
-    const lastfourProducts = [...products].sort((a, b) => a.id > b.id ? -1 : 1).slice(0,4)
+    console.log(products);
     const Categories = [...new Set(products.map(item => item.category))];
     return (
         <>
@@ -47,10 +49,10 @@ function Products() {
                         autoPlaySpeed={1000}
                         transitionDuration={3000}
                     >
-                        {topfourProducts.map((item) => {
+                        {products.map((item) => {
                             return (
-                                <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2 " key={item.id}>
-                                    <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category} />
+                                <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2 " key={item.name}>
+                                    <CardProduct name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category} />
                                 </div>
                             )
                         })}
@@ -78,10 +80,10 @@ function Products() {
                             autoPlaySpeed={1000}
                             transitionDuration={3000}
                         >
-                            {lastfourProducts.map((item) => {
+                            {products.map((item) => {
                                 return (
-                                    <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={item.id}>
-                                        <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category}/>
+                                    <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={item.name}>
+                                        <CardProduct name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category}/>
                                     </div>
                                 )
                             })}
@@ -110,14 +112,13 @@ function Products() {
                             {}
                             <Tab eventKey="featured" title="Engine" style={{ color: 'black' }}>
                                 <div className="row cards">
-                                    
-                                        {products.filter(product=>product.category=='Engine').map((item, index) => {
+                                        {products.filter(product=>product.category=='Car Side Mirrors').map((item, index) => {
                                             return (
                                                 <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                                                    <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category} />
+                                                    <CardProduct name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category} />
                                                 </div>
                                             )
-                                        })}
+                                        }).slice(0,4)}
                                 </div>
                             </Tab>
                             <Tab eventKey="bestsellers" title="Brake Kit">
@@ -125,7 +126,7 @@ function Products() {
                                     {products.filter(product=>product.category=='Brake Kit').map((item, index) => {
                                         return (
                                             <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                                                <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category}/>
+                                                <CardProduct name={item.name} image={item.img} desc={item.desc} price={item.price} category={item.category}/>
                                             </div>
                                         )
                                     })}
@@ -136,7 +137,7 @@ function Products() {
                                     {products.filter(product=>product.category=='Weel').map((item, index) => {
                                         return (
                                             <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                                                <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} category={item.category}/>
+                                                <CardProduct name={item.name} image={item.img} desc={item.desc} price={item.price} category={item.category}/>
                                             </div>
                                         )
                                     })}

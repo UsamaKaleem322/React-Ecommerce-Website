@@ -1,23 +1,18 @@
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaCartShopping } from "react-icons/fa6";
-import Badge from 'react-bootstrap/Badge'
 import { MDBBadge } from 'mdb-react-ui-kit';
 import { FaHeart } from "react-icons/fa6";
 import './Style.css'
 import { Link } from 'react-router-dom';
-import CartModel from '../Cart/Cart';
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { auth } from '../../Firebase/Firebase-config';
 import {signOut} from 'firebase/auth'
 function Header() {
 
-  const [show, setShow] = useState(false);
-  const handleShow = () => {
-    return setShow(true)
-  }
- 
+const Logout=()=>{
+  signOut(auth);
+}
   const quantity = useSelector(state => state.cart.totalQuantity)
   return (
     <>
@@ -46,7 +41,7 @@ function Header() {
         </div>
       </div>
 
-      <div className="container-fluid px-md-5 mainbar" >
+      <div className="container-fluid  px-md-5 mainbar " >
         <Navbar expand="md"  >
           < >
             <Link to={'/'} style={{ textDecoration: 'none' }}>
@@ -55,23 +50,22 @@ function Header() {
             <Navbar.Toggle />
             <Navbar.Collapse >
               <Nav
-                className="me-auto my-2 my-lg-0 mx-5"
+                className="me-auto my-2 my-lg-0 mx-3"
               >
-                <Nav.Link><Link to={'/'} style={{ textDecoration: 'none', color: 'black' }}> Home</Link></Nav.Link>
+                <Nav.Link><Link to={'/'} onClick={()=>!auth.currentUser? alert('Please Sign in First'):''} style={{ textDecoration: 'none', color: 'black' }}> Home</Link></Nav.Link>
                 <Nav.Link><Link to={'/shop'} style={{ textDecoration: 'none', color: 'black' }}> Shop</Link></Nav.Link>
                 <Nav.Link><Link to={'/cart'}  style={{ textDecoration: 'none', color: 'black' }}> Cart</Link></Nav.Link>
+                <Nav.Link><Link to={'/add-product'}onClick={()=>!auth.currentUser? alert('Please Sign in First'):''}  style={{ textDecoration: 'none', color: 'black' }}> Add Product</Link></Nav.Link>
               </Nav>
-              <span className='ms-5 text-light'><FaHeart style={{ fontSize: '23px', color: 'red' }} /></span>
+              <span className='ms-md-5 text-light'><FaHeart style={{ fontSize: '23px', color: 'red' }} /></span>
               <Link to={'/cart'} className='ms-3 text-light'><FaCartShopping style={{ fontSize: '25px', color: 'red' }} /> <MDBBadge color='dark' className=' translate-middle rounded-circle' >{quantity}</MDBBadge></Link>
-              {auth.currentUser? 
-              <Link to={'/signin'}><button onClick={()=>signOut(auth)} className='btn btn-dark ms-5'>Logout</button></Link>:
-              <Link to={'/signin'}><button className='btn btn-dark ms-5'>Sign In</button></Link>}
-                
+              {!!auth.currentUser? 
+              <Link to={'/signin'}><button onClick={()=>Logout()  } className='btn btn-dark ms-5'>Logout</button></Link>:
+              <Link to={'/signin'}><button className='btn btn-dark ms-5' style={{position:'relative',float:'right'}}>Sign In</button></Link>}
             </Navbar.Collapse>
           </>
         </Navbar>
       </div>
-      {show && <CartModel handleShow={() => setShow} openmodel={show} />}
     </>
   );
 }

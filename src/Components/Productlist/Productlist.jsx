@@ -8,7 +8,10 @@ import { LiaStarSolid } from 'react-icons/lia'
 import { RiStarSLine } from 'react-icons/ri'
 import Form from 'react-bootstrap/Form';
 const Productlist = () => {
-  const products = useMemo(() => useSelector(state => state.products.allProducts), [])
+  const products = useMemo(() => useSelector(state => state.products.allProducts), []);
+  console.log(products);
+  const categories=[...new Set(products.map(product=>product.category))]
+
   const colors=['Black', 'Grey', 'Red ','Blue', 'Orange',  'Brown', 'Pink', 'Yellow', 'Green', 'Purple', 'Maroon', 'Turquoise', 'Cyan', 'Navy', 'blue', 'Gold', 'Tomato', 'Teal', 'Lime', 'Cyan', 'Chocolate',  'Dark', 'blue', 'Navy']
   return (
     <>
@@ -17,46 +20,17 @@ const Productlist = () => {
         <div className="row my-5 px-lg-5 mx-lg-5">
           <div className="col-lg-3 sidebar p-0 " style={{height:'fit-content'}}>
             <h4 className='p-3' style={{ borderBottom: '1px solid lightgray' }}>Filters</h4>
-            <Accordion defaultActiveKey="0" flush>
+            <Accordion defaultActiveKey={'0'} flush>
               <Accordion.Item eventKey="0">
                 <Accordion.Header><b>Categories</b> </Accordion.Header>
                 <Accordion.Body>
-                  <div className='d-flex justify-content-between p-0'>
-                    <p>  Construction & Repair</p>
-                    <p style={{ fontSize: '12px' }}>254</p>
+                  {categories.map(item=>
+                    <div className='d-flex justify-content-between p-0'>
+                    <p>{item}</p>
                   </div>
-                  <div className='d-flex justify-content-between p-0'>
-                    <p>  Instruments</p>
-                    <p style={{ fontSize: '12px' }}>54</p>
-                  </div>
-                  <div className='d-flex justify-content-between p-0'>
-                    <p>  <b>Power Tools</b></p>
-                    <p style={{ fontSize: '12px' }}>21</p>
-                  </div>
-                  <div className='d-flex justify-content-between p-0'>
-                    <p>  Cordless Screwdrivers</p>
-                    <p style={{ fontSize: '12px' }}>4</p>
-                  </div>
-                  <div className='d-flex justify-content-between p-0'>
-                    <p>  Screwdrivers</p>
-                    <p style={{ fontSize: '12px' }}>76</p>
-                  </div>
-                  <div className='d-flex justify-content-between p-0'>
-                    <p>  Wrenches</p>
-                    <p style={{ fontSize: '12px' }}>14</p>
-                  </div>
-                  <div className='d-flex justify-content-between p-0'>
-                    <p>  Grinding Machines</p>
-                    <p style={{ fontSize: '12px' }}>44</p>
-                  </div>
-                  <div className='d-flex justify-content-between p-0'>
-                    <p>  Milling Cutters</p>
-                    <p style={{ fontSize: '12px' }}>24</p>
-                  </div>
-                  <div className='d-flex justify-content-between p-0'>
-                    <p>Electric Spray Guns</p>
-                    <p style={{ fontSize: '12px' }}>9</p>
-                  </div>
+                    )}
+                  
+                  
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="1">
@@ -130,7 +104,7 @@ const Productlist = () => {
               {products.map((item, index) => {
                 return (
                   <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                    <CardProduct id={item.id} name={item.name} img={item.img} text={item.text} price={item.price} />
+                    <CardProduct name={item.name} image={item.image} desc={item.desc} price={item.price} />
                   </div>
                 )
               })}

@@ -14,7 +14,7 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import './Style.css'
-const Cart = ({ handleShow, openmodel }) => {
+const Cart = () => {
   const cartProducts = useSelector(state => state.cart.cartProducts);
   const totalPrice = useSelector(state => state.cart.totalPrice);
   const quantity = useSelector(state => state.cart.totalQuantity)
@@ -58,26 +58,26 @@ const Cart = ({ handleShow, openmodel }) => {
                                 <div className="d-flex flex-row align-items-center">
                                   <div>
                                     <MDBCardImage
-                                      src={product.img}
-                                      fluid className="rounded-3" style={{ width: "65px" }}
+                                      src={product.image}
+                                      fluid className="rounded-3" style={{ width: "130px" }}
                                       alt="Shopping item" />
                                   </div>
                                   <div className="ms-3">
                                     <MDBTypography tag="h5">
-                                      {product.name}
+                                      {product?.name?.slice(0,40)}
                                     </MDBTypography>
-                                    <p className="small mb-0">{product.text.slice(0, 88)}</p>
+                                    <p className="small mb-0">{product?.desc?.slice(0,150)}</p>
                                   </div>
                                 </div>
                                 <div className="d-flex flex-row align-items-center">
                                   <div style={{ width: "50px" }}>
                                     <MDBTypography tag="h5" className="fw-normal mb-0">
-                                      {product.quantity}
+                                      {product?.quantity}
                                     </MDBTypography>
                                   </div>
                                   <div style={{ width: "80px" }}>
                                     <MDBTypography tag="h5" className="mb-0">
-                                      ${product.price}
+                                      ${product?.price}
                                     </MDBTypography>
                                   </div>
                                   <a onClick={() => dispatch(removeFromcart(product))} style={{ color: "red", cursor: 'pointer' }}>
@@ -101,26 +101,6 @@ const Cart = ({ handleShow, openmodel }) => {
                             </MDBTypography>
 
                           </div>
-
-
-                          {/* <form className="mt-4">
-                      <MDBInput className="mb-4" label="Cardholder's Name" type="text" size="lg"
-                        placeholder="Cardholder's Name" contrast />
-
-                      <MDBInput className="mb-4" label="Card Number" type="text" size="lg"
-                        minLength="19" maxLength="19" placeholder="1234 5678 9012 3457" contrast />
-
-                      <MDBRow className="mb-4">
-                        <MDBCol md="6">
-                          <MDBInput className="mb-4" label="Expiration" type="text" size="lg"
-                            minLength="7" maxLength="7" placeholder="MM/YYYY" contrast />
-                        </MDBCol>
-                        <MDBCol md="6">
-                          <MDBInput className="mb-4" label="Cvv" type="text" size="lg" minLength="3"
-                            maxLength="3" placeholder="&#9679;&#9679;&#9679;" contrast />
-                        </MDBCol>
-                      </MDBRow>
-                    </form> */}
 
                           <hr />
 

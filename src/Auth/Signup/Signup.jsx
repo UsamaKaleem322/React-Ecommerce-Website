@@ -32,27 +32,24 @@ function Signup() {
   }
   return (
     <Container>
-      <Row className='login mt-5'>
-        <Col xs={7}>
+      <Row className='login mt-5 py-4'>
+        <Col >
           <h3>Sign Up</h3>
-          <form className='pe-3 my-5' onSubmit={e=>handleSubmit(e)}>
+          <form className='pe-3 my-3' onSubmit={e=>handleSubmit(e)}>
             <input type="text" name='username' className='form-control' required placeholder='Name....' />
             <input type="email" name='email' required className='form-control my-4' placeholder='Email....' />
             <input type="password" minLength={6} name='password' required className='form-control my-4' placeholder='Password....' />
             <button className='btn btn-dark ' style={{width:'auto'}}>Sign Up</button>
           </form>
-
-        </Col>
-        <Col xs={5} className='my-5'>
-          <Socialbuttons/>
         </Col>
       </Row>
-      <Row className='signup-bar'>
-        <Col className='d-flex justify-content-center'>
-          <p className='pt-2'>Have an account ? </p>
+      <Row className='signup-bar py-3'>
+        <Col className='d-flex justify-content-between'>
+          <Socialbuttons />
           <Link to={'/signin'}>
-          <button className='btn  btn-outline-dark mx-3 mt-1'>Sign In</button>
+            <button className='btn  btn-dark  mt-1'>Sign Up</button>
           </Link>
+
         </Col>
       </Row>
     </Container>

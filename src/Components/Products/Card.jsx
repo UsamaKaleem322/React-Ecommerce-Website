@@ -12,13 +12,13 @@ import { Link } from 'react-router-dom';
 import { singleProduct } from '../../Features/ProductSlice';
 import { useDispatch, } from 'react-redux';
 
-const CardProduct = ({ id, name, img, text, price ,category}) => {
+const CardProduct = ({ name, image, desc, price ,category}) => {
   const dispatch = useDispatch()
   return (
     <>
-      <Card className='card product' onClick={() => dispatch(singleProduct(id))} style={{ cursor: 'pointer' }}>
-        <Link to={'/' + id} style={{ textDecoration: 'none', color: 'black' }}>
-          <Card.Img variant="top" src={img} />
+      <Card className='card product' onClick={() => dispatch(singleProduct(name))} style={{ cursor: 'pointer', height:'420px' }}>
+        <Link to={'/' + name} style={{ textDecoration: 'none', color: 'black' }}>
+          <Card.Img variant="top" src={image} height={'200px'} width={'200px'} />
           <div className="button">
             <Link></Link>
             <button className='btn  btn-sm ' style={{ color: 'wheat' }} >Sale</button>
@@ -34,7 +34,7 @@ const CardProduct = ({ id, name, img, text, price ,category}) => {
           
           <Badge bg='success'><MdDone fontSize={'15px'} /></Badge>
           <p style={{ fontSize: '12px', marginTop: '10px', color: 'grey' }}>SKU:753-3875-12</p>
-          <Card.Title style={{ fontSize: "18px" }}>{name}</Card.Title>
+          <Card.Title style={{ fontSize: "18px" }}>{name.slice(0,40)}</Card.Title>
           <div className="d-flex justify-content-between">
             <div className="icons">
               <LiaStarSolid color='#FFD333' fontSize={'20px'} />
@@ -47,7 +47,7 @@ const CardProduct = ({ id, name, img, text, price ,category}) => {
           </div>
           <div className="d-flex justify-content-between my-2">
             <Card.Title>${price}</Card.Title>
-            <span ><BsCartCheck className='cart' onClick={() => { return (dispatch(addtocart({ id, name, img, price, text, quantity: 1, totalPrice: price })), alert('Product Add Successfully')) }
+            <span ><BsCartCheck className='cart' onClick={() => { return (dispatch(addtocart({ name, image, price, desc, quantity: 1, totalPrice: price })), alert('Product Add Successfully')) }
             } /></span>
           </div>
         </Card.Body>

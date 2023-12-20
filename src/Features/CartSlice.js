@@ -11,7 +11,7 @@ export const cartSlice=createSlice({
   reducers:{
     addtocart:(state,action)=>{
         const product=action.payload;
-        const existingProduct=state.cartProducts.find(item=>item.id===product.id)
+        const existingProduct=state.cartProducts.find(item=>item.name===product.name)
         if(existingProduct){
           incrementProduct(state,existingProduct,product)
         }
@@ -21,13 +21,19 @@ export const cartSlice=createSlice({
     },
     removeFromcart:(state,action)=>{
       const product=action.payload;
-      const existingProduct=state.cartProducts.find(item=>item.id===product.id);
+      const existingProduct=state.cartProducts.find(item=>item.name===product.name);
       if(existingProduct.quantity===1){
           removeProduct(state,state.cartProducts,product)
       }
       else{
          decrementProduct(state,existingProduct,product)
       }
+    },
+    clearCart:(state,action)=>{
+      state.cartProducts=[];
+      state.quantity=0;
+      state.totalPrice=0;
+      state.totalQuantity=0
     }
   }
 });
@@ -39,11 +45,10 @@ const incrementProduct=(state,existingProduct,product)=>{
 }
 const addnew=(state,cart,product)=>{
  const newProduct={
-    id:product.id,
     name:product.name,
-    img:product.img,
+    image:product.image,
     price:product.price,
-    text:product.text,
+    desc:product.desc,
     quantity:1,
     totalPrice:product
   };
@@ -51,7 +56,7 @@ const addnew=(state,cart,product)=>{
   updateCarttotal(state,product.price)
 }
 const removeProduct=(state,cart,product)=>{
-    state.cartProducts=cart.filter(item=>item.id!==product.id);
+    state.cartProducts=cart.filter(item=>item.name!==product.name);
     updateCarttotal(state,-product.price)
 };
 const decrementProduct=(state,existingProduct,product)=>{
@@ -64,5 +69,5 @@ const updateCarttotal=(state,productPrice)=>{
   state.totalQuantity+= productPrice > 0 ? 1 : -1 ;
   state.totalPrice+=productPrice;
 }
-export const {addtocart,removeFromcart}=cartSlice.actions
+export const {addtocart,removeFromcart,clearCart}=cartSlice.actions
 export default cartSlice.reducer;
