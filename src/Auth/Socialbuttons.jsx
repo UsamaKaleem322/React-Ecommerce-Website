@@ -19,21 +19,21 @@ const Socialbuttons = () => {
         console.log(error.message);
       }
     }
-    const SigninWithFacebook = async () => {
-      try {
-        await signInWithPopup(auth, facebookProvider)
-        navigate('/')
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
+    // const SigninWithFacebook = async () => {
+    //   try {
+    //     await signInWithPopup(auth, facebookProvider)
+    //     navigate('/')
+    //   } catch (error) {
+    //     console.log(error.message);
+    //   }
+    // }
   localStorage.setItem('user', JSON.stringify(auth.currentUser))
     
   return (
     <>
     <div className="socialbuttons d-flex gap-3 justify-content-center">
       <button className='btn btn-sm ' onClick={()=>SigninWithGoogle()} style={{backgroundColor:'red',color:"white",borderRadius:'50px'}}><FaGoogle style={{ fontSize: '23px' }} /></button>
-      <button className='btn btn-sm' style={{backgroundColor:'blue',color:"white",borderRadius:'100px' , }}><FaFacebookF onClick={()=>SigninWithFacebook()} style={{ fontSize: '23px' }} /></button>
+      {/* <button className='btn btn-sm' style={{backgroundColor:'blue',color:"white",borderRadius:'100px' , }}><FaFacebookF onClick={()=>SigninWithFacebook()} style={{ fontSize: '23px' }} /></button> */}
       </div>
     </>
   )

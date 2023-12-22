@@ -1,9 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import { RiFacebookBoxLine } from "react-icons/ri";
-import { FaGoogle, FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../Firebase/Firebase-config';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
@@ -31,8 +28,8 @@ function Signup() {
     }
   }
   return (
-    <Container>
-      <Row className='login mt-5 py-4'>
+    <div className='banner1'>
+      <Row className='login py-4'>
         <Col >
           <h3>Sign Up</h3>
           <form className='pe-3 my-3' onSubmit={e=>handleSubmit(e)}>
@@ -47,12 +44,12 @@ function Signup() {
         <Col className='d-flex justify-content-between'>
           <Socialbuttons />
           <Link to={'/signin'}>
-            <button className='btn  btn-dark  mt-1'>Sign Up</button>
+            <button className='btn  btn-dark  mt-1'>Sign In</button>
           </Link>
 
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 }
 

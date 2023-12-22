@@ -59,7 +59,7 @@ const Logout=()=>{
               </Nav>
               <span className='ms-md-5 text-light'><FaHeart style={{ fontSize: '23px', color: 'red' }} /></span>
               <Link to={'/cart'} className='ms-3 text-light'><FaCartShopping style={{ fontSize: '25px', color: 'red' }} /> <MDBBadge color='dark' className=' translate-middle rounded-circle' >{quantity}</MDBBadge></Link>
-              {!!auth.currentUser? 
+              {auth.currentUser? 
               <Link to={'/signin'}><button onClick={()=>Logout()  } className='btn btn-dark ms-5'>Logout</button></Link>:
               <Link to={'/signin'}><button className='btn btn-dark ms-5' style={{position:'relative',float:'right'}}>Sign In</button></Link>}
             </Navbar.Collapse>

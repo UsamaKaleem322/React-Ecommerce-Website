@@ -18,9 +18,6 @@ const Add = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const storage = getStorage();
-    const metadata = {
-      contentType: ['image/png', 'image/jpeg', 'image/jpg', 'image/PNG']
-    };
     const storageRef = ref(storage, 'images/' + product.image.name);
     const uploadTask = uploadBytesResumable(storageRef, product.image);
     uploadTask.on('state_changed',

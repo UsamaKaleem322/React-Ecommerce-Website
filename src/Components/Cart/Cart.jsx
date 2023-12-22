@@ -22,7 +22,7 @@ const Cart = () => {
   const dispatch = useDispatch()
   return (
     <>
-       {quantity>0?
+       {cartProducts?.length>0?
       <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
         <MDBContainer className="py-5 h-100">
           <MDBRow className="justify-content-center align-items-center h-100">
@@ -37,19 +37,15 @@ const Cart = () => {
                           shopping
                         </Link>
                       </MDBTypography>
-
                       <hr />
-
                       <div className="d-flex justify-content-between align-items-center mb-4">
                         <div>
                           <p className="mb-1">Shopping cart</p>
                         </div>
                         <div>
                           <p className="mb-0">You have {quantity} items in your cart</p>
-
                         </div>
                       </div>
-
                       {cartProducts.map(product => {
                         return (
                           <MDBCard className="mb-3">

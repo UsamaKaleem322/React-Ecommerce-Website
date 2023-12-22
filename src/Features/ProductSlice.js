@@ -1,18 +1,30 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../Firebase/Firebase-config';
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async (_, {  }) => {
-  const querySnapshot = await getDocs(collection(db, 'Products'));
-  const allProducts = [];
-  querySnapshot.forEach((doc) => {
-    const productData = doc.data();
-    allProducts.push(productData);
-  });
-  return allProducts;
+export const fetchProducts = () => async (dispatch) => {
+  try {
+    const querySnapshot = await getDocs(collection(db, 'Products'));
+    const allProducts = [];
+    querySnapshot.forEach((doc) => {
+      const productData = doc.data();
+      const productWithID = { id: doc.id, ...productData };
+      allProducts.push(productWithID);
+    });
+    dispatch(getAllProduct(allProducts));
+  } catch (error) {
+    console.error('Error fetching products: ', error);
+  }
+};
+
+// Create separate actions for success and error
+const getAllProduct = (allProducts) => ({
+  type: 'products/getAllProduct',
+  payload: allProducts,
 });
 
-export const productSlice = createSlice({
+// Use a reducer to handle the state
+const productSlice = createSlice({
   name: 'products',
   initialState: {
     allProducts: [],
@@ -24,13 +36,11 @@ export const productSlice = createSlice({
       localStorage.setItem('Product', JSON.stringify(product));
       state.product = product;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+    getAllProduct(state, action) {
       state.allProducts = action.payload;
-    });
+    },
   },
 });
 
-export const { singleProduct, GetAllProduct } = productSlice.actions;
+export const { singleProduct } = productSlice.actions;
 export default productSlice.reducer;

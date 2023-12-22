@@ -8,9 +8,8 @@ import { LiaStarSolid } from 'react-icons/lia'
 import { RiStarSLine } from 'react-icons/ri'
 import Form from 'react-bootstrap/Form';
 const Productlist = () => {
-  const products = useMemo(() => useSelector(state => state.products.allProducts), []);
-  console.log(products);
-  const categories=[...new Set(products.map(product=>product.category))]
+  const products = useSelector(state => state?.products?.allProducts)
+  const categories=[...new Set(products?.map(product=>product.category))]
 
   const colors=['Black', 'Grey', 'Red ','Blue', 'Orange',  'Brown', 'Pink', 'Yellow', 'Green', 'Purple', 'Maroon', 'Turquoise', 'Cyan', 'Navy', 'blue', 'Gold', 'Tomato', 'Teal', 'Lime', 'Cyan', 'Chocolate',  'Dark', 'blue', 'Navy']
   return (
@@ -29,8 +28,6 @@ const Productlist = () => {
                     <p>{item}</p>
                   </div>
                     )}
-                  
-                  
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="1">
@@ -108,7 +105,6 @@ const Productlist = () => {
                   </div>
                 )
               })}
-
             </div>
           </div>
         </div>

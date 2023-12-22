@@ -1,4 +1,9 @@
-
+.banner1{
+  background-image: url('/Images/banner.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 7% 1%;
+}
 
 .login{
   width:370px;
@@ -23,7 +28,6 @@
   justify-content: space-between;
   padding: 1%;
   background-color: rgb(160, 160, 160);
-  margin-bottom: 4%;
   border-radius: 0 0 10px 10px;
   color: white;
 }

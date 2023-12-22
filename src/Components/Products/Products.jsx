@@ -10,7 +10,6 @@ import './style.css'
 
 
 function Products() {
-    
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 3000 },
@@ -30,7 +29,6 @@ function Products() {
         }
     };
     const products = useSelector(state => state.products.allProducts)
-    console.log(products);
     const Categories = [...new Set(products.map(item => item.category))];
     return (
         <>

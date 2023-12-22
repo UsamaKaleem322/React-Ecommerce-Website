@@ -25,8 +25,8 @@ function Signin() {
   }
 
   return (
-    <Container>
-      <Row className='login mt-5 pb-5'>
+    <div className='banner1'>
+      <Row className='login pb-5'>
         <Col >
           <h3 className='mt-3'>Sign In</h3>
           <form className='pe-3' onSubmit={e => handleSubmit(e)}>
@@ -47,7 +47,7 @@ function Signin() {
 
         </Col>
       </Row>
-    </Container>
+    </div>
     //   <Container className='signin-form my-5'>
     //   <form onSubmit={e=>handleSubmit(e)}>
     //     <h3>Sign In</h3>
