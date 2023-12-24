@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { auth } from '../../Firebase/Firebase-config';
 import {signOut} from 'firebase/auth'
+import { useEffect } from 'react';
 function Header() {
 
 const Logout=()=>{
   signOut(auth);
 }
-  const quantity = useSelector(state => state.cart.totalQuantity)
+  const cartProducts = useSelector(state => state.cart.cartProducts)
+  
   return (
     <>
       <div className="container-fluid">
@@ -52,13 +54,13 @@ const Logout=()=>{
               <Nav
                 className="me-auto my-2 my-lg-0 mx-3"
               >
-                <Nav.Link><Link to={'/'} onClick={()=>!auth.currentUser? alert('Please Sign in First'):''} style={{ textDecoration: 'none', color: 'black' }}> Home</Link></Nav.Link>
+                <Nav.Link><Link to={'/'}  style={{ textDecoration: 'none', color: 'black' }}> Home</Link></Nav.Link>
                 <Nav.Link><Link to={'/shop'} style={{ textDecoration: 'none', color: 'black' }}> Shop</Link></Nav.Link>
                 <Nav.Link><Link to={'/cart'}  style={{ textDecoration: 'none', color: 'black' }}> Cart</Link></Nav.Link>
                 <Nav.Link><Link to={'/add-product'}onClick={()=>!auth.currentUser? alert('Please Sign in First'):''}  style={{ textDecoration: 'none', color: 'black' }}> Add Product</Link></Nav.Link>
               </Nav>
               <span className='ms-md-5 text-light'><FaHeart style={{ fontSize: '23px', color: 'red' }} /></span>
-              <Link to={'/cart'} className='ms-3 text-light'><FaCartShopping style={{ fontSize: '25px', color: 'red' }} /> <MDBBadge color='dark' className=' translate-middle rounded-circle' >{quantity}</MDBBadge></Link>
+              <Link to={'/cart'} className='ms-3 text-light'><FaCartShopping style={{ fontSize: '25px', color: 'red' }} /> <MDBBadge color='dark' className=' translate-middle rounded-circle' >{cartProducts?.length}</MDBBadge></Link>
               {auth.currentUser? 
               <Link to={'/signin'}><button onClick={()=>Logout()  } className='btn btn-dark ms-5'>Logout</button></Link>:
               <Link to={'/signin'}><button className='btn btn-dark ms-5' style={{position:'relative',float:'right'}}>Sign In</button></Link>}

@@ -14,12 +14,12 @@ import { auth } from './Firebase/Firebase-config';
 import { fetchProducts } from './Features/ProductSlice';
 import { BrowserRouter as Router, Routes, Route,Navigate} from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartProducts } from './Features/CartSlice';
+
 const RequiredAuth=({children})=>{
   return auth.currentUser?children :<Navigate to={'/signin'}/>
 }
-
 const App = () => {
   const dispatch=useDispatch();
     useEffect(()=>{
@@ -32,7 +32,7 @@ const App = () => {
         <Header />
         <Routes>
         <Route path={'/'} element={<PageTransition><Home/></PageTransition>}/>
-        <Route path='/:name' element={<PageTransition><SingleProduct/></PageTransition> }/>
+        <Route path='/:id' element={<PageTransition><SingleProduct/></PageTransition> }/>
         <Route path='/shop' element={<PageTransition><Productlist/></PageTransition>}/>
         <Route path='/cart' element={<PageTransition><Cart/></PageTransition>}/>
         <Route path='/checkout' element={<PageTransition><Checkout/></PageTransition>}/>

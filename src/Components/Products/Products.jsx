@@ -1,13 +1,13 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { Link } from 'react-router-dom';
-import {useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardProduct from './Card';
 import Carouselbar from './Carouselbar';
 import './style.css'
-
+import Loading from '../Loading/Loading';
 
 function Products() {
     const responsive = {
@@ -29,32 +29,20 @@ function Products() {
         }
     };
     const products = useSelector(state => state.products.allProducts)
+    const loading = useSelector(state => state.products.loading)
     const Categories = [...new Set(products.map(item => item.category))];
     return (
         <>
-            <Carouselbar title={'Featured Products'}/>
+            <Carouselbar title={'Featured Products'} />
             <div className="container my-5">
                 <div className="row products1">
-                    <Carousel
-                        swipeable={true}
-                        draggable={true}
-                        showDots={false}
-                        arrows={false}
-                        responsive={responsive}
-                        ssr={true} // means to render carousel on server-side.
-                        infinite={true}
-                        autoPlay={true}
-                        autoPlaySpeed={1000}
-                        transitionDuration={3000}
-                    >
-                        {products.map((item) => {
-                            return (
-                                <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2 " key={item.name}>
-                                    <CardProduct name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category} />
-                                </div>
-                            )
-                        })}
-                    </Carousel>
+                    {!loading ? products.map((item) => {
+                        return (
+                            <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2 " key={item.id}>
+                                <CardProduct id={item.id} name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category} />
+                            </div>
+                        )
+                    }).slice(4, 8) : <Loading />}
                 </div>
             </div>
 
@@ -80,8 +68,8 @@ function Products() {
                         >
                             {products.map((item) => {
                                 return (
-                                    <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={item.name}>
-                                        <CardProduct name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category}/>
+                                    <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={item.id}>
+                                        <CardProduct id={item.id} name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category} />
                                     </div>
                                 )
                             })}
@@ -89,59 +77,55 @@ function Products() {
                     </div>
                 </div>
             </div>
-           
+
             <div className="container my-5">
                 <div className="row">
                     <div className="col-xl-3 featured2 text-center p-0">
                         <div className="content p-5 d-flex flex-column gap-2" >
                             <h3 className='my-4' >Categories</h3>
-                            {Categories.map(item=> <a style={{color:'white'}}>{item}</a> )}
+                            {Categories.map(item => <a style={{ color: 'white' }}>{item}</a>)}
                             <Link to={'/shop'} className='btn btn-sm my-4' style={{ backgroundColor: '#E52727', color: 'white' }}>See All</Link>
                         </div>
                     </div>
                     <div className="col-xl-9">
 
-                        <Tabs
-                            defaultActiveKey="featured"
+                        {!loading?<Tabs
+                            defaultActiveKey={Categories[0]}
                             id="uncontrolled-tab-example"
                             className="mb-3 tabs mt-1"
-                            color='black'
+                            color="black"
                         >
-                            {}
-                            <Tab eventKey="featured" title="Engine" style={{ color: 'black' }}>
-                                <div className="row cards">
-                                        {products.filter(product=>product.category=='Car Side Mirrors').map((item, index) => {
-                                            return (
-                                                <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                                                    <CardProduct name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category} />
-                                                </div>
-                                            )
-                                        }).slice(0,4)}
-                                </div>
-                            </Tab>
-                            <Tab eventKey="bestsellers" title="Brake Kit">
-                            <div className="row cards">
-                                    {products.filter(product=>product.category=='Brake Kit').map((item, index) => {
-                                        return (
-                                            <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                                                <CardProduct name={item.name} image={item.img} desc={item.desc} price={item.price} category={item.category}/>
-                                            </div>
-                                        )
-                                    })}
-                            </div>
-                            </Tab>
-                            <Tab eventKey="popular" title="Weel" >
-                            <div className="row cards">
-                                    {products.filter(product=>product.category=='Weel').map((item, index) => {
-                                        return (
-                                            <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                                                <CardProduct name={item.name} image={item.img} desc={item.desc} price={item.price} category={item.category}/>
-                                            </div>
-                                        )
-                                    })}
-                            </div>
-                            </Tab>
-                        </Tabs>
+                            {Categories.map((category, index) => (
+                                <Tab
+                                    eventKey={category}
+                                    title={category}
+                                    style={{ color: 'black' }}
+                                    key={index}
+                                >
+                                    <div className="row cards">
+                                        {!loading ? products
+                                            .filter((product) => product.category === category)
+                                                .map((item) => (
+                                                    <div
+                                                        className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2"
+                                                        key={item.id}
+                                                    >
+                                                        <CardProduct
+                                                            id={item.id}
+                                                            name={item.name}
+                                                            image={item.image}
+                                                            desc={item.desc}
+                                                            price={item.price}
+                                                            category={item.category}
+                                                        />
+                                                    </div>
+                                                ))
+                                                .slice(0, 4)
+                                            : <Loading />}
+                                    </div>
+                                </Tab>
+                            ))}
+                        </Tabs>:<Loading/>}
 
                     </div>
                 </div>

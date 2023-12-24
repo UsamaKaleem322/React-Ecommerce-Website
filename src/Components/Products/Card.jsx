@@ -12,12 +12,12 @@ import { Link } from 'react-router-dom';
 import { singleProduct } from '../../Features/ProductSlice';
 import { useDispatch, } from 'react-redux';
 
-const CardProduct = ({ name, image, desc, price ,category}) => {
+const CardProduct = ({id, name, image, desc, price ,category}) => {
   const dispatch = useDispatch()
   return (
     <>
-      <Card className='card product' onClick={() => dispatch(singleProduct(name))} style={{ cursor: 'pointer', height:'420px' }}>
-        <Link to={'/' + name} style={{ textDecoration: 'none', color: 'black' }}>
+      <Card className='card product' onClick={() => dispatch(singleProduct(id))} style={{ cursor: 'pointer', height:'420px' }}>
+        <Link to={'/' + id} style={{ textDecoration: 'none', color: 'black' }}>
           <Card.Img variant="top" src={image} height={'200px'} width={'200px'} />
           <div className="button">
             <Link></Link>

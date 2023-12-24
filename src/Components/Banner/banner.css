@@ -1,10 +1,11 @@
 .banner{
-    background-image:url('/Images/banner.jpg') ;
-    background-size: fill;
+    background-image:url('/Images/banner.jpeg') ;
+    background-size: cover;
     background-repeat: no-repeat;
     z-index: 99;
     overflow-wrap: none;
     display: flex;
+
 }
 .overlay {
     padding: 8% 10%;

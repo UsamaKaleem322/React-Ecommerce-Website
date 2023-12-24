@@ -3,15 +3,17 @@ import Card from 'react-bootstrap/Card';
 import { LiaStarSolid } from 'react-icons/lia'
 import { RiStarSLine } from 'react-icons/ri'
 import Carouselbar from '../Products/Carouselbar';
-
+import Loading from '../Loading/Loading';
 import './style.css'
 import { useSelector } from 'react-redux';
 const New = () => {
-    const products = useSelector(state => state.products.allProducts).slice(0,8)
+    const products = useSelector(state => state.products.allProducts).slice(0,8);
+    const loading=useSelector(state=>state.products.loading);
     return (
         <div className='container'>
             <Carouselbar title={'New Arrivals'} />
-            <div className="d-flex flex-wrap justify-content-center gap-md-3 gap-lg-1 pt-3" >
+
+            {!loading? <div className="d-flex flex-wrap justify-content-center gap-md-3 gap-lg-1 pt-3" >
                 {products.map((item) => {
                     return (
                         <div className='mt-1' style={{ border: '1px solid lightgray', width: '20rem' }}>
@@ -37,7 +39,7 @@ const New = () => {
                         </div>
                     )
                 })}
-            </div>
+            </div>:<Loading/>}
             <Carouselbar title={'Latest News'} />
             <div className="d-flex flex-wrap justify-content-around gap-1 my-4">
                 <div >

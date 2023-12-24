@@ -1,16 +1,13 @@
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link, json, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../Firebase/Firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import Socialbuttons from '../Socialbuttons';
-import { MDBCheckbox } from 'mdb-react-ui-kit';
 import React from 'react';
 import '../style.css'
-import { useEffect } from 'react';
+
 function Signin() {
-  
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +15,8 @@ function Signin() {
     const password = e.target.password.value;
     try {
       await signInWithEmailAndPassword(auth, email, password)
-      navigate('/')
+      console.log(auth.currentUser);
+      navigate(-1)
     } catch (error) {
       alert('Login Failed! Try Again')
     }
@@ -26,9 +24,10 @@ function Signin() {
 
   return (
     <div className='banner1'>
+      <div className="overlay2">
       <Row className='login pb-5'>
         <Col >
-          <h3 className='mt-3'>Sign In</h3>
+          <h3 className='mt-3'>Sign In First</h3>
           <form className='pe-3' onSubmit={e => handleSubmit(e)}>
             <input type="email" name='email' required className='form-control my-4' placeholder='Email....' />
             <input type="password" minLength={6} name='password' required className='form-control my-4' placeholder='Password....' />
@@ -47,6 +46,7 @@ function Signin() {
 
         </Col>
       </Row>
+      </div>
     </div>
     //   <Container className='signin-form my-5'>
     //   <form onSubmit={e=>handleSubmit(e)}>

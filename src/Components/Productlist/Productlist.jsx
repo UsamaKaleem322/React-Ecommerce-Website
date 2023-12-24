@@ -7,8 +7,10 @@ import CardProduct from '../Products/Card';
 import { LiaStarSolid } from 'react-icons/lia'
 import { RiStarSLine } from 'react-icons/ri'
 import Form from 'react-bootstrap/Form';
+import Loading from '../Loading/Loading.jsx'
 const Productlist = () => {
   const products = useSelector(state => state?.products?.allProducts)
+  const loading=useSelector(state=>state.products.loading);
   const categories=[...new Set(products?.map(product=>product.category))]
 
   const colors=['Black', 'Grey', 'Red ','Blue', 'Orange',  'Brown', 'Pink', 'Yellow', 'Green', 'Purple', 'Maroon', 'Turquoise', 'Cyan', 'Navy', 'blue', 'Gold', 'Tomato', 'Teal', 'Lime', 'Cyan', 'Chocolate',  'Dark', 'blue', 'Navy']
@@ -98,13 +100,13 @@ const Productlist = () => {
           </div>
           <div className="col-lg-9 ps-3">
             <div className="row cards ">
-              {products.map((item, index) => {
+              {!loading ? products.map((item, index) => {
                 return (
                   <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                    <CardProduct name={item.name} image={item.image} desc={item.desc} price={item.price} />
+                    <CardProduct id={item.id} name={item.name} image={item.image} desc={item.desc} price={item.price} />
                   </div>
                 )
-              })}
+              }):<Loading/>}
             </div>
           </div>
         </div>

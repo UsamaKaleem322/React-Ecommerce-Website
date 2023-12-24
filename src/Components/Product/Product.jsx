@@ -26,7 +26,7 @@ const SingleProduct = () => {
                   </Card.Text>
                   
                   <h5 className='my-3'>Price : ${item.price}</h5>
-                  <Button variant="success " className='my-3' onClick={() => {return(dispatch(addtocart({ name:item.name, image:item.image, price:item.price, desc:item.desc,quantity:1,totalPrice:item.price})), alert('Product Add Successfully') ) }
+                  <Button variant="success " className='my-3' onClick={() => {return(dispatch(addtocart({id:item.id, name:item.name, image:item.image, price:item.price, desc:item.desc,quantity:1,totalPrice:item.price})), alert('Product Add Successfully') ) }
             } >Add to Cart</Button>
                 </Card.Body>
               </Card>

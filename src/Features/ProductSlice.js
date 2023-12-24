@@ -3,7 +3,6 @@ import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../Firebase/Firebase-config';
 
 export const fetchProducts = () => async (dispatch) => {
-  try {
     const querySnapshot = await getDocs(collection(db, 'Products'));
     const allProducts = [];
     querySnapshot.forEach((doc) => {
@@ -12,9 +11,6 @@ export const fetchProducts = () => async (dispatch) => {
       allProducts.push(productWithID);
     });
     dispatch(getAllProduct(allProducts));
-  } catch (error) {
-    console.error('Error fetching products: ', error);
-  }
 };
 
 // Create separate actions for success and error
@@ -29,15 +25,17 @@ const productSlice = createSlice({
   initialState: {
     allProducts: [],
     product: JSON.parse(localStorage.getItem('Product')),
+    loading:true
   },
   reducers: {
     singleProduct(state, action) {
-      const product = state.allProducts.filter((product) => product.name === action.payload);
+      const product = state.allProducts.filter((product) => product.id === action.payload);
       localStorage.setItem('Product', JSON.stringify(product));
       state.product = product;
     },
     getAllProduct(state, action) {
       state.allProducts = action.payload;
+      state.loading=false
     },
   },
 });
