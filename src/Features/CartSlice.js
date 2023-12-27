@@ -8,24 +8,39 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     cartProducts: [],
-    quantity: 0,
-    totalQuantity: 0,
-    totalPrice: 0,
-    loading:true,
+    loading: true,
   },
   reducers: {
-    
-    setCartProducts(state, action) {
+    getCartProducts(state, action) {
       state.cartProducts = action.payload;
-      state.loading=false;
+      state.loading = false;
     },
-    addtocart: (state, action) => {
+    addtocart:async (state, action) => {
       const product = action.payload;
-        addnew(state, state.cartProducts, product);
+      await addDoc(collection(db, "CartProducts"), {
+        name: product.name,
+        image: product.image,
+        price: product.price,
+        desc: product.desc,
+        quantity: 1,
+        totalPrice: product.price
+      });
+      window.location.reload()
     },
-    removeFromcart: (state, action) =>{
+    incrementCartProduct : async (state, action) => {
+      const product=action.payload;
+      const docref = doc(db, 'CartProducts', product.id);
+      await updateDoc(docref, {
+        quantity: product.quantity + 1,
+        totalPrice: product.totalPrice + product.price,
+      });
+      updateCarttotal(state, product.price);
+    },
+    removeFromcart: async (state, action) => {
       const product = action.payload;
-      removeProduct(state, state.cartProducts, product);
+      const docRef = doc(db, 'CartProducts', product.id);
+      await deleteDoc(docRef);
+      window.location.reload()
     }
   },
 });
@@ -39,49 +54,22 @@ export const cartProducts = () => async (dispatch) => {
       const productWithID = { id: doc.id, ...productData };
       allProducts.push(productWithID);
     });
-    dispatch(setCartProducts(allProducts));
+    dispatch(getCartProducts(allProducts));
   } catch (error) {
     console.error('Error fetching products: ', error);
   }
 };
-const setCartProducts = (allProducts) => ({
-  type: 'cart/setCartProducts',
+
+const getCartProducts = (allProducts) => ({
+  type: 'cart/getCartProducts',
   payload: allProducts
 });
 
-const addnew = async (state, cart, product) => {
-  await addDoc(collection(db, "CartProducts"), {
-    name: product.name,
-    image: product.image,
-    price: product.price,
-    desc: product.desc,
-    quantity: 1,
-    totalPrice: product.price
-  });
-  window.location.reload()
-};
-
-const removeProduct =  async(state, cart, product) => {
-  const docRef = doc(db, 'CartProducts', product.id);
-  await deleteDoc(docRef);
-  window.location.reload()
-};
-
-// const incrementProduct = async (state, existingProduct, product) => {
-
-//   const { name, quantity, totalPrice, price } = existingProduct;
-//   const docref = doc(db, 'CartProducts', name);
-//   await updateDoc(docref, {
-//     quantity: quantity + 1,
-//     totalPrice: totalPrice + price,
-//   });
-//   updateCarttotal(state, product.price);
-// };
 
 // const decrementProduct = (state, existingProduct, product) => {
-  //   existingProduct.quantity--;
-  //   existingProduct.totalPrice -= product.price;
-  //   updateCarttotal(state, -product.price);
+//   existingProduct.quantity--;
+//   existingProduct.totalPrice -= product.price;
+//   updateCarttotal(state, -product.price);
 // };
 
 // const updateCarttotal = (state, productPrice) => {
@@ -89,5 +77,5 @@ const removeProduct =  async(state, cart, product) => {
 //   state.totalPrice += productPrice;
 // };
 
-export const {  addtocart, removeFromcart } = cartSlice.actions;
+export const { addtocart, removeFromcart ,incrementCartProduct} = cartSlice.actions;
 export default cartSlice.reducer;

@@ -12,6 +12,7 @@ const Productlist = () => {
   const products = useSelector(state => state?.products?.allProducts)
   const loading=useSelector(state=>state.products.loading);
   const categories=[...new Set(products?.map(product=>product.category))]
+  
 
   const colors=['Black', 'Grey', 'Red ','Blue', 'Orange',  'Brown', 'Pink', 'Yellow', 'Green', 'Purple', 'Maroon', 'Turquoise', 'Cyan', 'Navy', 'blue', 'Gold', 'Tomato', 'Teal', 'Lime', 'Cyan', 'Chocolate',  'Dark', 'blue', 'Navy']
   return (
@@ -103,7 +104,7 @@ const Productlist = () => {
               {!loading ? products.map((item, index) => {
                 return (
                   <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
-                    <CardProduct id={item.id} name={item.name} image={item.image} desc={item.desc} price={item.price} />
+                    <CardProduct id={item.id} name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category}/>
                   </div>
                 )
               }):<Loading/>}

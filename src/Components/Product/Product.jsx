@@ -20,7 +20,7 @@ const SingleProduct = () => {
               <Card className='card-content'>
                 <Card.Body >
                   <h1 style={{ textDecoration: 'none' }}>{item.name}</h1>
-                  <h3 style={{ color: 'orange' }}>15% off Today</h3>
+                  <h3 style={{ color: 'orange' }}>{item.category}</h3>
                   <Card.Text className='me-5'>
                     {item.desc}
                   </Card.Text>

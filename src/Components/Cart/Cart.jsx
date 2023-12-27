@@ -1,15 +1,13 @@
-import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromcart } from '../../Features/CartSlice';
 import { FaTrashAlt } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../Firebase/Firebase-config';
 import Loading from '../Loading/Loading';
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
   MDBCol,
   MDBContainer,
   MDBRow,
@@ -17,17 +15,16 @@ import {
 } from "mdb-react-ui-kit";
 import './Style.css'
 const Cart = () => {
-  const cartProducts = useSelector(state => state.cart.cartProducts);
-  const totalPrice = cartProducts.reduce((total, product) => {
+  const cartProducts = useSelector(state => state?.cart?.cartProducts);
+  const loading = useSelector(state => state?.cart?.loading);
+  const totalPrice = cartProducts?.reduce((total, product) => {
     return total + product.price
   }, 0);
-  const loading = useSelector(state => state.cart.loading);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   return (
     <>
       <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
-
         {<MDBContainer className="py-5 h-100">
           <MDBRow className="justify-content-center align-items-center h-100">
             <MDBCol>
@@ -50,13 +47,14 @@ const Cart = () => {
                           <p className="mb-0">You have {cartProducts?.length} items in your cart</p>
                         </div>
                       </div>
-                      {cartProducts?.map(product => {
+
+                      {!loading? cartProducts?.map(product => {
                         return (
                           <MDBCard className="mb-3">
-                            <div key={product.id} className='row'>
+                            <div key={product?.id} className='row'>
                               <div className='col-md-2 m-auto'>
                                 <img
-                                  src={product.image}
+                                  src={product?.image}
                                   fluid className="rounded-3" style={{ width: "100%" }}
                                   alt="Shopping item" />
                               </div>
@@ -97,7 +95,7 @@ const Cart = () => {
                             </div>
                           </MDBCard>
                         )
-                      })}
+                      }):<Loading/>}
 
                     </MDBCol>
 

@@ -10,14 +10,16 @@ import {
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../Firebase/Firebase-config';
 import { doc, deleteDoc, addDoc, collection } from 'firebase/firestore';
 import { auth } from '../../Firebase/Firebase-config';
+import { cartProducts } from '../../Features/CartSlice';
 const Checkout = () => {
   const navigate = useNavigate()
-  const cartProducts = useSelector(state => state.cart.cartProducts)
-  const totalPrice = cartProducts.reduce((total, product) => {
+  const dispatch=useDispatch()
+  const CartProducts = useSelector(state => state.cart.cartProducts)
+  const totalPrice = CartProducts.reduce((total, product) => {
     return total + product.price
   }, 0);
   const [checkoutFields, setCheckoutFields] = useState({});
@@ -30,7 +32,6 @@ const Checkout = () => {
   const CheckoutCart = async (e) => {
     e.preventDefault()
     const user = auth?.currentUser
-    console.log(auth.currentUser.displayName);
     const checkoutCollectionRef = collection(db, 'Checkout');
     await addDoc(checkoutCollectionRef, {
       phone: checkoutFields?.phone,
@@ -39,14 +40,16 @@ const Checkout = () => {
       name:user?.displayName,
       email:user?.email,
       totalPrice:totalPrice,
-      products:cartProducts
+      products:CartProducts
     });
 
-    cartProducts.map(async (product) => {
+    CartProducts.map(async (product) => {
       const docRef = doc(db, 'CartProducts', product.id);
       await deleteDoc(docRef)
     })
+    dispatch(cartProducts())
     navigate('/shop')
+    window.location.reload()
   }
 
   return (
