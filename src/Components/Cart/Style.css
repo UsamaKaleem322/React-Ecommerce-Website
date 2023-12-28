@@ -36,3 +36,14 @@
 .checkout{
   background-color: black;
 }
+
+section{
+  background-color: #eee;
+}
+.cart-image{
+  width: 100%;
+}
+.text-body{
+  text-decoration: none;
+}
+

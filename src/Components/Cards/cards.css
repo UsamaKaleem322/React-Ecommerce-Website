@@ -1,0 +1,12 @@
+.container .cards{
+  border-bottom: 1px solid gray;
+}
+.cards .row i{
+  font-size:55px;
+  color:#E52727
+}
+
+.cards .row p{
+  margin-top:-8px;
+  color:gray
+}

@@ -33,12 +33,11 @@ const CardProduct = ({id, name, image, desc, price ,category}) => {
   }
   return (
     <>
-      <Card className='card product' onClick={() => dispatch(singleProduct(id))} style={{ cursor: 'pointer', height:'420px' }}>
-        <Link to={'/' + id} style={{ textDecoration: 'none', color: 'black' }}>
-          <Card.Img variant="top" src={image} height={'200px'} width={'200px'} />
+      <Card className='card product' onClick={() => dispatch(singleProduct(id))}>
+        <Link to={'/' + id} className='link'>
+          <Card.Img variant="top" src={image} className='img' />
           <div className="button">
-            <Link></Link>
-            <button className='btn  btn-sm ' style={{ color: 'wheat' }} >Sale</button>
+            <button className='btn  btn-sm'  >Sale</button>
           </div>
           <div className="heart" >
             <span><AiFillHeart /></span>
@@ -50,15 +49,15 @@ const CardProduct = ({id, name, image, desc, price ,category}) => {
         <Card.Body>
           
           <Badge bg='success'><MdDone fontSize={'15px'} /></Badge>
-          <p style={{ fontSize: '12px', marginTop: '10px', color: 'grey' }}>{category}</p>
-          <Card.Title style={{ fontSize: "18px" }}>{name.slice(0,40)}</Card.Title>
+          <p >{category}</p>
+          <Card.Title className='title'>{name.slice(0,40)}</Card.Title>
           <div className="d-flex justify-content-between">
             <div className="icons">
-              <LiaStarSolid color='#FFD333' fontSize={'20px'} />
-              <LiaStarSolid color='#FFD333' fontSize={'20px'} />
-              <LiaStarSolid color='#FFD333' fontSize={'20px'} />
-              <LiaStarSolid color='#FFD333' fontSize={'20px'} />
-              <RiStarSLine color='#FFD333' fontSize={'20px'} />
+              <LiaStarSolid className='stars' />
+              <LiaStarSolid className='stars' />
+              <LiaStarSolid className='stars' />
+              <LiaStarSolid className='stars' />
+              <RiStarSLine className='stars' />
             </div>
             <span color='gray'>4 on 3 reviews</span>
           </div>

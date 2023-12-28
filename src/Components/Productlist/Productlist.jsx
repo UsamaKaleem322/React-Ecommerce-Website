@@ -12,7 +12,6 @@ const Productlist = () => {
   const products = useSelector(state => state?.products?.allProducts)
   const loading=useSelector(state=>state.products.loading);
   const categories=[...new Set(products?.map(product=>product.category))]
-  
 
   const colors=['Black', 'Grey', 'Red ','Blue', 'Orange',  'Brown', 'Pink', 'Yellow', 'Green', 'Purple', 'Maroon', 'Turquoise', 'Cyan', 'Navy', 'blue', 'Gold', 'Tomato', 'Teal', 'Lime', 'Cyan', 'Chocolate',  'Dark', 'blue', 'Navy']
   return (
@@ -20,13 +19,13 @@ const Productlist = () => {
       <div className="container-fluid ">
         <h1 style={{ textAlign: 'center' }}>Shop</h1>
         <div className="row my-5 px-lg-5 mx-lg-5">
-          <div className="col-lg-3 sidebar p-0 " style={{height:'fit-content'}}>
-            <h4 className='p-3' style={{ borderBottom: '1px solid lightgray' }}>Filters</h4>
+          <div className="col-lg-3 sidebar p-0 " >
+            <h4 className='p-3' >Filters</h4>
             <Accordion defaultActiveKey={'0'} flush>
               <Accordion.Item eventKey="0">
                 <Accordion.Header><b>Categories</b> </Accordion.Header>
                 <Accordion.Body>
-                  {categories.map(item=>
+                  {categories?.map(item=>
                     <div className='d-flex justify-content-between p-0'>
                     <p>{item}</p>
                   </div>
@@ -42,21 +41,21 @@ const Productlist = () => {
                         <input className='form-check-input me-2 ' type="radio" name="vehicle" id="vehicle" />
                         <p>All Parts</p>
                       </div>
-                      <p style={{ fontSize: '12px' }}>57</p>
+                      <p>57</p>
                     </div>
                     <div className="control d-flex justify-content-between">
                       <div className='d-flex'>
                         <input className='form-check-input me-2' type="radio" name="vehicle" id="vehicle" />
                         <p>2011 Ford Focus S</p>
                       </div>
-                      <p style={{ fontSize: '12px' }}>12</p>
+                      <p>12</p>
                     </div>
                     <div className="control d-flex justify-content-between">
                       <div className='d-flex'>
                         <input className='form-check-input me-2' type="radio" name="vehicle" id="vehicle" />
                         <p>2015 Audi A3</p>
                       </div>
-                      <p style={{ fontSize: '12px' }}>51</p>
+                      <p>51</p>
                     </div>
                     <button className='btn btn-sm btn-outline-primary'>Add Vehicle</button>
                   </form>
@@ -77,11 +76,11 @@ const Productlist = () => {
                 <Accordion.Body>
                   <div className="d-flex justify-content-between">
                     <div className="icons">
-                      <LiaStarSolid color='#FFD333' fontSize={'20px'} />
-                      <LiaStarSolid color='#FFD333' fontSize={'20px'} />
-                      <LiaStarSolid color='#FFD333' fontSize={'20px'} />
-                      <LiaStarSolid color='#FFD333' fontSize={'20px'} />
-                      <RiStarSLine color='#FFD333' fontSize={'20px'} />
+                      <LiaStarSolid className='stars' />
+                      <LiaStarSolid className='stars' />
+                      <LiaStarSolid className='stars' />
+                      <LiaStarSolid className='stars' />
+                      <RiStarSLine className='stars' />
                     </div>
                     <span color='gray'>4 on 3 reviews</span>
                   </div>
@@ -101,7 +100,7 @@ const Productlist = () => {
           </div>
           <div className="col-lg-9 ps-3">
             <div className="row cards ">
-              {!loading ? products.map((item, index) => {
+              {!loading ? products?.map((item, index) => {
                 return (
                   <div className="col-md-6 col-lg-6 col-xl-4 col-xxl-3 my-2" key={index}>
                     <CardProduct id={item.id} name={item.name} image={item.image} desc={item.desc} price={item.price} category={item.category}/>

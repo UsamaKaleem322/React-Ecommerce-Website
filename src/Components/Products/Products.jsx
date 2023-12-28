@@ -83,8 +83,8 @@ function Products() {
                     <div className="col-xl-3 featured2 text-center p-0">
                         <div className="content p-5 d-flex flex-column gap-2" >
                             <h3 className='my-4' >Categories</h3>
-                            {Categories.map(item => <a style={{ color: 'white' }}>{item}</a>)}
-                            <Link to={'/shop'} className='btn btn-sm my-4' style={{ backgroundColor: '#E52727', color: 'white' }}>See All</Link>
+                            {Categories.map(item => <a className='category'>{item}</a>)}
+                            <Link to={'/shop'} className='btn btn-sm my-4 link'>See All</Link>
                         </div>
                     </div>
                     <div className="col-xl-9">

@@ -3,3 +3,39 @@
         display: none;
     }
 }
+
+.footer{
+    background-color:#333333;
+    color: aliceblue;
+}
+.footer p{
+    color: gray;
+}
+.footer h6{
+    margin-top: -16px;
+}
+.footer li{
+    list-style: none;
+    color: gray;
+    margin-bottom: 5px;
+}
+.footer button{
+    background-color: #E52727;
+    color: white;
+}
+.copyright{
+    background-color: #2B2B2B;
+}
+.copyright p{
+    color: gray;
+    margin-top: 8px;
+}
+.copyright b{
+    color: white;
+}
+.copyright img{
+    height: 32px;
+    margin-top:8px;
+    float:right;
+    width:300px
+}

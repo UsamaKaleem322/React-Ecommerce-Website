@@ -4,8 +4,8 @@ const Banner = () => {
     return (
         <div className='banner text-center' >
             <div className="overlay">
-                <h1 style={{ fontSize: '50px', color: 'white' }}>Find Parts For Your Vehicle</h1>
-                <h5 style={{ color: 'white' }}>Over hundreds of brands and tens of thousands of parts</h5>
+                <h1 >Find Parts For Your Vehicle</h1>
+                <h5 >Over hundreds of brands and tens of thousands of parts</h5>
                 <form>
                     <div className="row py-5">
                         

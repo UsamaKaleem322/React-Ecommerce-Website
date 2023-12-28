@@ -1,7 +1,14 @@
 .sidebar{
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 0px 0 rgba(0, 0, 0, 0.11);
+  height: fit-content;
 }
-
+.sidebar h4{
+  border-bottom: 1px solid lightgray;
+}
+.icons .stars{
+  color: #FFD333;
+  font-size: 20px;
+}
 @media screen and (max-width: 700px) {
   .sidebar {
     display: none;

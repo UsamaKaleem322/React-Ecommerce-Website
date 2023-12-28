@@ -53,7 +53,7 @@ const Checkout = () => {
   }
 
   return (
-    <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
+    <section className="h-100 h-custom" >
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol>
@@ -62,7 +62,7 @@ const Checkout = () => {
                 <MDBRow>
                   <MDBCol lg="7">
                     <MDBTypography tag="h5">
-                      <Link to={'/shop'} style={{ textDecoration: 'none' }} className="text-body">
+                      <Link to={'/shop'} className="text-body">
                         <FaArrowLeftLong /> Continue shopping
                       </Link>
                     </MDBTypography>

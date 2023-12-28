@@ -31,14 +31,14 @@ const App = () => {
       <Router>   
         <Header />
         <Routes>
-        <Route path={'/'} element={<PageTransition><Home/></PageTransition>}/>
-        <Route path='/:id' element={<PageTransition><SingleProduct/></PageTransition> }/>
-        <Route path='/shop' element={<PageTransition><Productlist/></PageTransition>}/>
-        <Route path='/cart' element={<PageTransition><Cart/></PageTransition>}/>
-        <Route path='/checkout' element={<PageTransition><Checkout/></PageTransition>}/>
-        <Route path='/add-product' element={<PageTransition><RequiredAuth><Add/></RequiredAuth></PageTransition> }/>
-        <Route path='/signin' element={<Signin/>}/>
-        <Route path='/signup' element={<Signup/>}/>
+        <Route exact path={'/'} element={<PageTransition><Home/></PageTransition>}/>
+        <Route exact path='/:id' element={<PageTransition><SingleProduct/></PageTransition> }/>
+        <Route exact path='/shop' element={<PageTransition><Productlist/></PageTransition>}/>
+        <Route exact path='/cart' element={<PageTransition><Cart/></PageTransition>}/>
+        <Route exact path='/checkout' element={<PageTransition><Checkout/></PageTransition>}/>
+        <Route exact path='/add-product' element={<PageTransition><RequiredAuth><Add/></RequiredAuth></PageTransition> }/>
+        <Route exact path='/signin' element={<Signin/>}/>
+        <Route exact path='/signup' element={<Signup/>}/>
       </Routes>
       <Footer />
       </Router>  

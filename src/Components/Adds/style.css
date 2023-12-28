@@ -3,19 +3,35 @@
    background-repeat: no-repeat;
    padding: none;
    transition: 0.3s ease-in;
+   width:97%;
+   margin:auto
 }
+.adds1 h3{
+    color:black;
+    background-color: yellow;
+    width: fit-content;
+    padding: 5px;
+}
+
 .overlay{
     background-image: linear-gradient(to right , rgba(0, 0, 0, 0.892),rgba(255, 255, 255, 0),rgba(255, 255, 255, 0));
-    padding: none;
     transition: 0.3s ease-in;
+    color: aliceblue;
+    padding: 22px;
 }
 
+.overlay button{
+    background-color: #FF3333;
+    color: aliceblue;
+}
 
 .adds2{
-    background-image: url('/Images/banner2.jpg');
+    background-image: url('/Images/banner1.jpg');
     background-repeat: no-repeat;
     padding: none;
     transition: 0.3s ease-in;   
+    width:97%;
+    margin:auto
  }
 .adds2 h3{
     color:black;

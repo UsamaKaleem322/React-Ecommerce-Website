@@ -9,3 +9,30 @@
         display: none;
     }
 }
+
+.arrivals{
+    border: 1px solid lightgray;
+     width: 20rem
+}
+.arrivals img{
+    width: 100px;
+    padding-top: 5px;
+}
+.arrivals .icons{
+    color: #FFD333;
+    font-size: 20px;
+}
+.reviews{
+    margin-top: -8px;
+}
+.reviews span{
+    margin-top: 5px;
+}
+.news .card{
+    width: 20rem;
+}
+
+.news .card button{
+    color: red;
+     margin-top: -30px
+}

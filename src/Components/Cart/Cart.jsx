@@ -24,16 +24,16 @@ const Cart = () => {
   const dispatch = useDispatch()
   return (
     <>
-      <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
+      <section className="h-100 h-custom">
         {<MDBContainer className="py-5 h-100">
-          <MDBRow className="justify-content-center align-items-center h-100">
+          <MDBRow >
             <MDBCol>
               <MDBCard>
                 <MDBCardBody className="p-4">
                   <MDBRow>
                     <MDBCol lg="7">
                       <MDBTypography tag="h5">
-                        <Link to={'/shop'} style={{ textDecoration: 'none' }} className="text-body">
+                        <Link to={'/shop'} className="text-body">
                           <FaArrowLeftLong /> Continue
                           shopping
                         </Link>
@@ -55,14 +55,14 @@ const Cart = () => {
                               <div className='col-md-2 m-auto'>
                                 <img
                                   src={product?.image}
-                                  fluid className="rounded-3" style={{ width: "100%" }}
+                                  fluid className="rounded-3 cart-image" 
                                   alt="Shopping item" />
                               </div>
                               <div className="col-md-10" >
                                 <div className="row p-3">
                                   <div className="col-md-8">
-                                    <h5>{product?.name?.slice(0, 40)}</h5>
-                                    <p className="small mb-0">{product?.desc?.slice(0, 150)}</p>
+                                    <h5>{product?.name?.slice(0, 30)}</h5>
+                                    <p className="small mb-0">{product?.desc?.slice(0, 120)}</p>
                                   </div>
                                   <div className="col-md-4 my-2">
                                     <div className="d-flex justify-content-between my-md-3">

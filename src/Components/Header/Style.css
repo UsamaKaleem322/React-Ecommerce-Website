@@ -4,5 +4,31 @@
     }
   }
   
-
-  
+.topbar .left-menu{
+    background-color: #E52727;
+     color: white;
+      border-radius: 0px 0px 70px 0px
+}
+.topbar .middle{
+    font-size:9px;
+     padding-top:8px
+}
+.topbar .right-menu{
+    background-color: #333333;
+     color: white;
+     border-radius: 0px 0px 0px 70px
+}
+.title{
+    text-decoration: none;
+}
+.title h3 span{
+    color: red;
+}
+.mainbar .main-menu{
+    text-decoration: none;
+    color: black;
+}
+.mainbar .cart{
+    font-size: 25px;
+    color: red;
+}

@@ -10,17 +10,17 @@ const SingleProduct = () => {
   return (
     <Container >
       
-        {product.map((item, index) => {
+        {product?.map((item, index) => {
           return (
             <Row className='my-5' key={index}>
               <Col md={6} >
-                <img src={item.image} className='card-image' alt="" />
+                <img src={item.image} className='card-image' alt={item.image} />
             </Col>
             <Col md={6}  >
               <Card className='card-content'>
                 <Card.Body >
-                  <h1 style={{ textDecoration: 'none' }}>{item.name}</h1>
-                  <h3 style={{ color: 'orange' }}>{item.category}</h3>
+                  <h1>{item.name}</h1>
+                  <h3 >{item.category}</h3>
                   <Card.Text className='me-5'>
                     {item.desc}
                   </Card.Text>
