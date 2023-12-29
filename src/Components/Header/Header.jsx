@@ -4,15 +4,17 @@ import { FaCartShopping } from "react-icons/fa6";
 import { MDBBadge } from 'mdb-react-ui-kit';
 import { FaHeart } from "react-icons/fa6";
 import './Style.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { auth } from '../../Firebase/Firebase-config';
 import { signOut } from 'firebase/auth'
-import { useEffect } from 'react';
+import { useState } from 'react';
 function Header() {
-
+  const navigate=useNavigate();
   const Logout = () => {
     signOut(auth);
+    navigate('/signin');
+    window.location.reload()
   }
   const cartProducts = useSelector(state => state.cart.cartProducts)
 
@@ -61,7 +63,7 @@ function Header() {
               <span className='ms-md-5 text-light'><FaHeart className='cart' /></span>
               <Link to={'/cart'} className='ms-3 text-light'><FaCartShopping className='cart' /> <MDBBadge color='dark' className=' translate-middle rounded-circle ' >{cartProducts?.length}</MDBBadge></Link>
               {auth.currentUser ?
-                <Link to={'/signin'}><button onClick={() => Logout()} className='btn btn-dark ms-5'>Logout</button></Link> :
+                <button onClick={() => Logout() } className='btn btn-dark ms-5 logout'>Logout</button> :
                 <Link to={'/signin'}><button className='btn btn-dark ms-5' >Sign In</button></Link>}
             </Navbar.Collapse>
           </>

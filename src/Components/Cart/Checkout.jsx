@@ -49,7 +49,6 @@ const Checkout = () => {
     })
     dispatch(cartProducts())
     navigate('/shop')
-    window.location.reload()
   }
 
   return (

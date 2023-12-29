@@ -14,6 +14,7 @@ const Socialbuttons = () => {
       try {
         await signInWithPopup(auth, googleProvider)
          localStorage.setItem('user',JSON.stringify(auth.currentUser) )
+         console.log(auth.currentUser)
         navigate('/')
       } catch (error) {
         console.log(error.message);

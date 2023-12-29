@@ -13,13 +13,8 @@ function Signin() {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    try {
       await signInWithEmailAndPassword(auth, email, password)
-      console.log(auth.currentUser);
       navigate(-1)
-    } catch (error) {
-      alert('Login Failed! Try Again')
-    }
   }
 
   return (
@@ -31,7 +26,6 @@ function Signin() {
           <form className='pe-3' onSubmit={e => handleSubmit(e)}>
             <input type="email" name='email' required className='form-control my-4' placeholder='Email....' />
             <input type="password" minLength={6} name='password' required className='form-control my-4' placeholder='Password....' />
-
             <button className='btn  btn-dark  mt-3'>Sign In</button>
           </form>
         </Col>

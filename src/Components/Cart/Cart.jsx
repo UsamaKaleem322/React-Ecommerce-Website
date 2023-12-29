@@ -5,6 +5,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../Firebase/Firebase-config';
 import Loading from '../Loading/Loading';
+import { cartProducts } from '../../Features/CartSlice';
 import {
   MDBCard,
   MDBCardBody,
@@ -15,9 +16,9 @@ import {
 } from "mdb-react-ui-kit";
 import './Style.css'
 const Cart = () => {
-  const cartProducts = useSelector(state => state?.cart?.cartProducts);
+  const allCartProducts = useSelector(state => state?.cart?.cartProducts);
   const loading = useSelector(state => state?.cart?.loading);
-  const totalPrice = cartProducts?.reduce((total, product) => {
+  const totalPrice = allCartProducts?.reduce((total, product) => {
     return total + product.price
   }, 0);
   const navigate = useNavigate()
@@ -44,11 +45,11 @@ const Cart = () => {
                           <p className="mb-1">Shopping cart</p>
                         </div>
                         <div>
-                          <p className="mb-0">You have {cartProducts?.length} items in your cart</p>
+                          <p className="mb-0">You have {allCartProducts?.length} items in your cart</p>
                         </div>
                       </div>
 
-                      {!loading? cartProducts?.map(product => {
+                      {!loading? allCartProducts?.map(product => {
                         return (
                           <MDBCard className="mb-3">
                             <div key={product?.id} className='row'>
@@ -81,6 +82,7 @@ const Cart = () => {
                                           onClick={() => {
                                             return (
                                               dispatch(removeFromcart(product)),
+                                              dispatch(cartProducts()),
                                               alert('Product Remove Successfully')
                                             )
                                           }}
@@ -123,7 +125,7 @@ const Cart = () => {
                             <p className="mb-2">${totalPrice}</p>
                           </div>
 
-                          {!!cartProducts?.length > 0 && <button className='btn btn-info my-3' onClick={() => auth?.currentUser ? navigate('/checkout') : navigate('/signin')}>Proceed to Checkout</button>}
+                          {!!allCartProducts?.length > 0 && <button className='btn btn-info my-3' onClick={() => auth?.currentUser ? navigate('/checkout') : navigate('/signin')}>Proceed to Checkout</button>}
 
                         </MDBCardBody>
                       </MDBCard>
