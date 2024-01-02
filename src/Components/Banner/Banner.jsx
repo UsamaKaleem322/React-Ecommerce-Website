@@ -58,7 +58,7 @@ const Banner = () => {
                                 </select>
                             </div>
 
-                            <div className="col-md-3">
+                            <div className="col-md-3 my-1">
                                 <button className='btn w-100' onClick={e=>e.preventDefault()} style={{ backgroundColor: '#E52727', color: 'white' }}>Submit</button>
                             </div>
                         

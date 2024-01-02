@@ -48,8 +48,10 @@
     color: aliceblue;
 }
 .link{
-    /* background-color: #E52727; */
     color: aliceblue;
+}
+.categorybutton{
+    background-color: #E52727;
 }
 .focus {
     color: rgb(190, 190, 190);
