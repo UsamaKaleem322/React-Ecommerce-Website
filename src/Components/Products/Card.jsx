@@ -11,15 +11,25 @@ import { Link } from 'react-router-dom';
 import { singleProduct } from '../../Features/ProductSlice';
 import { useDispatch, useSelector, } from 'react-redux';
 import { cartProducts } from '../../Features/CartSlice';
-import { collection, addDoc, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from '../../Firebase/Firebase-config';
 const CardProduct = ({id, name, image, desc, price ,category}) => {
-  
+  const allCartProducts=useSelector(state=>state.cart.cartProducts);
   const dispatch = useDispatch()
 
   const handleCart=async()=>{
-      alert('Product Add Successfully')
+    const existing=allCartProducts?.find(item=>item.productId==id)
+    if(existing){
+      const docRef=doc(db,'CartProducts',existing.id);
+      alert('1 Product Quantity Inscrease')
+      await updateDoc(docRef,{
+        quantity:existing?.quantity+1,
+        totalPrice:existing?.totalPrice+price
+      })      
+    }
+    else{
       await addDoc(collection(db, "CartProducts"), {
+        productId:id,
         name: name,
         image: image,
         price: price,
@@ -28,7 +38,10 @@ const CardProduct = ({id, name, image, desc, price ,category}) => {
         quantity: 1,
         totalPrice:price
       });
-      dispatch(cartProducts())
+      alert('Product Add Successfully')
+    }
+    dispatch(cartProducts())
+      
   }
   return (
     <>

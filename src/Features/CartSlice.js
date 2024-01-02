@@ -23,12 +23,6 @@ export const cartSlice = createSlice({
         totalPrice: product.totalPrice + product.price,
       });
       updateCarttotal(state, product.price);
-    },
-    removeFromcart: async (state, action) => {
-      const product = action.payload;
-      const docRef = doc(db, 'CartProducts', product.id);
-      await deleteDoc(docRef);
-      window.location.reload()
     }
   },
 });

@@ -17,7 +17,9 @@ function Header() {
     window.location.reload()
   }
   const cartProducts = useSelector(state => state.cart.cartProducts)
-
+  const totalQuantity=cartProducts?.reduce((total,product)=>{
+    return total+product.quantity
+  },0)
   return (
     <>
       <div className="container-fluid">
@@ -61,7 +63,7 @@ function Header() {
                 <Nav.Link><Link to={'/add-product'} onClick={() => !auth.currentUser ? alert('Please Sign in First') : ''} className='main-menu'> Add Product</Link></Nav.Link>
               </Nav>
               <span className='ms-md-5 text-light'><FaHeart className='cart' /></span>
-              <Link to={'/cart'} className='ms-3 text-light'><FaCartShopping className='cart' /> <MDBBadge color='dark' className=' translate-middle rounded-circle ' >{cartProducts?.length}</MDBBadge></Link>
+              <Link to={'/cart'} className='ms-3 text-light'><FaCartShopping className='cart' /> <MDBBadge color='dark' className=' translate-middle rounded-circle ' >{totalQuantity}</MDBBadge></Link>
               {auth.currentUser ?
                 <button onClick={() => Logout() } className='btn btn-dark ms-5 logout'>Logout</button> :
                 <Link to={'/signin'}><button className='btn btn-dark ms-5' >Sign In</button></Link>}

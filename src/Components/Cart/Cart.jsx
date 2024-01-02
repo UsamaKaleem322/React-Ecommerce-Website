@@ -22,6 +22,9 @@ const Cart = () => {
   const totalPrice = allCartProducts?.reduce((total, product) => {
     return total + product.price
   }, 0);
+  const totalQuantity = allCartProducts?.reduce((total, product) => {
+    return total + product.quantity
+  }, 0);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   return (
@@ -46,59 +49,71 @@ const Cart = () => {
                           <p className="mb-1">Shopping cart</p>
                         </div>
                         <div>
-                          <p className="mb-0">You have {allCartProducts?.length} items in your cart</p>
+                          <p className="mb-0">You have {totalQuantity} items in your cart</p>
                         </div>
                       </div>
 
-                      {!loading? allCartProducts?.map(product => {
-                        const removeFromcart=async()=>{
-                          alert("Product Remove Successfuly")
-                          const docRef = doc(db, 'CartProducts', product.id);
-                          await deleteDoc(docRef);
-                          dispatch(cartProducts());
-                        }
-                        return (        
-                          <MDBCard className="mb-3">
-                            <div key={product?.id} className='row'>
-                              <div className='col-md-2 m-auto'>
-                                <img
-                                  src={product?.image}
-                                  fluid className="rounded-3 cart-image" 
-                                  alt="Shopping item" />
-                              </div>
-                              <div className="col-md-10" >
-                                <div className="row p-3">
-                                  <div className="col-md-8">
-                                    <h5>{product?.name?.slice(0, 30)}</h5>
-                                    <p className="small mb-0">{product?.desc?.slice(0, 120)}</p>
-                                  </div>
-                                  <div className="col-md-4 my-2">
-                                    <div className="d-flex justify-content-between my-md-3">
-                                      <div >
-                                        <MDBTypography tag="h5" className="mb-0">
-                                          ${product?.price}
-                                        </MDBTypography>
-                                      </div>
-                                      <div>
-                                        <MDBTypography tag="h5" className="fw-normal mb-0">
-                                          {product?.quantity}
-                                        </MDBTypography>
-                                      </div>
-                                      <div>
-                                        <a
-                                          onClick={() =>removeFromcart()}
-                                          style={{ color: "red", cursor: 'pointer' }}>
-                                          <FaTrashAlt />
-                                        </a>
+                      {!loading ?
+                        allCartProducts?.map( (product) => {
+
+                          const removeFromcart = async () => {
+                            if (product.quantity>1) {
+                              const docRef = doc(db, 'CartProducts', product.id);
+                              alert('1 Product Quantity Decrease')
+                              await updateDoc(docRef, {
+                                quantity: product?.quantity - 1,
+                                totalPrice: product?.totalPrice - product?.price
+                              })
+                            }
+                            else{
+                              const docRef = doc(db, 'CartProducts', product.id);
+                              alert("Product Remove Successfuly")
+                              await deleteDoc(docRef);
+                            }
+                            dispatch(cartProducts());
+                          }
+                          return (
+                            <MDBCard className="mb-3">
+                              <div key={product?.id} className='row'>
+                                <div className='col-md-2 m-auto'>
+                                  <img
+                                    src={product?.image}
+                                    fluid className="rounded-3 cart-image"
+                                    alt="Shopping item" />
+                                </div>
+                                <div className="col-md-10" >
+                                  <div className="row p-3">
+                                    <div className="col-md-8">
+                                      <h5>{product?.name?.slice(0, 30)}</h5>
+                                      <p className="small mb-0">{product?.desc?.slice(0, 120)}</p>
+                                    </div>
+                                    <div className="col-md-4 my-2">
+                                      <div className="d-flex justify-content-between my-md-3">
+                                        <div >
+                                          <MDBTypography tag="h5" className="mb-0">
+                                            ${product?.totalPrice}
+                                          </MDBTypography>
+                                        </div>
+                                        <div>
+                                          <MDBTypography tag="h5" className="fw-normal mb-0">
+                                            {product?.quantity}
+                                          </MDBTypography>
+                                        </div>
+                                        <div>
+                                          <a
+                                            onClick={() => removeFromcart()}
+                                            style={{ color: "red", cursor: 'pointer' }}>
+                                            <FaTrashAlt />
+                                          </a>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </MDBCard>
-                        )
-                      }):<Loading/>}
+                            </MDBCard>
+                          )
+                        }) : <Loading />}
 
                     </MDBCol>
 
