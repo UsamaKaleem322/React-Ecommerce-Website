@@ -32,6 +32,7 @@ const Checkout = () => {
   const CheckoutCart = async (e) => {
     e.preventDefault()
     const user = auth?.currentUser
+    alert('Checkout Products Successfully')
     const checkoutCollectionRef = collection(db, 'Checkout');
     await addDoc(checkoutCollectionRef, {
       phone: checkoutFields?.phone,

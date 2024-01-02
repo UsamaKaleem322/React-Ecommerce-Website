@@ -6,30 +6,29 @@ import { RiStarSLine } from 'react-icons/ri'
 import { BsCartCheck } from 'react-icons/bs'
 import { AiFillHeart } from 'react-icons/ai'
 import { PiBracketsSquareThin } from 'react-icons/pi'
-import { addtocart , incrementCartProduct} from '../../Features/CartSlice';
 import { MdDone } from 'react-icons/md'
 import { Link } from 'react-router-dom';
 import { singleProduct } from '../../Features/ProductSlice';
 import { useDispatch, useSelector, } from 'react-redux';
 import { cartProducts } from '../../Features/CartSlice';
+import { collection, addDoc, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { db } from '../../Firebase/Firebase-config';
 const CardProduct = ({id, name, image, desc, price ,category}) => {
-  const CartProducts=useSelector(state=>state.cart.cartProducts);
   
   const dispatch = useDispatch()
 
-  // useEffect(()=>{
-  //    dispatch(cartProducts())
-  // },[dispatch])
-
   const handleCart=async()=>{
-    const productExist =await CartProducts?.find(item => item.id === id);
-     console.log(productExist);
-     if(productExist){
-       dispatch(incrementCartProduct(productExist))
-    }else{
-      dispatch(addtocart({ name, image, price, desc,category, quantity: 1, totalPrice: price }))
-     }
-     alert('Product Add Successfully')
+      alert('Product Add Successfully')
+      await addDoc(collection(db, "CartProducts"), {
+        name: name,
+        image: image,
+        price: price,
+        desc:desc,
+        category:category,
+        quantity: 1,
+        totalPrice:price
+      });
+      dispatch(cartProducts())
   }
   return (
     <>

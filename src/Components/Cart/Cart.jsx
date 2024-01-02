@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromcart } from '../../Features/CartSlice';
 import { FaTrashAlt } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../Firebase/Firebase-config';
 import Loading from '../Loading/Loading';
 import { cartProducts } from '../../Features/CartSlice';
+import { collection, addDoc, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { db } from '../../Firebase/Firebase-config';
 import {
   MDBCard,
   MDBCardBody,
@@ -50,7 +51,13 @@ const Cart = () => {
                       </div>
 
                       {!loading? allCartProducts?.map(product => {
-                        return (
+                        const removeFromcart=async()=>{
+                          alert("Product Remove Successfuly")
+                          const docRef = doc(db, 'CartProducts', product.id);
+                          await deleteDoc(docRef);
+                          dispatch(cartProducts());
+                        }
+                        return (        
                           <MDBCard className="mb-3">
                             <div key={product?.id} className='row'>
                               <div className='col-md-2 m-auto'>
@@ -79,13 +86,7 @@ const Cart = () => {
                                       </div>
                                       <div>
                                         <a
-                                          onClick={() => {
-                                            return (
-                                              dispatch(removeFromcart(product)),
-                                              dispatch(cartProducts()),
-                                              alert('Product Remove Successfully')
-                                            )
-                                          }}
+                                          onClick={() =>removeFromcart()}
                                           style={{ color: "red", cursor: 'pointer' }}>
                                           <FaTrashAlt />
                                         </a>

@@ -2,7 +2,9 @@ import React, { memo } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import './style.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { addtocart } from '../../Features/CartSlice';
+import { collection, addDoc, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { db } from '../../Firebase/Firebase-config';
+import { cartProducts } from '../../Features/CartSlice';
 const SingleProduct = () => {
   const product = useSelector(state => state.products.product)
   const dispatch=useDispatch();
@@ -11,6 +13,19 @@ const SingleProduct = () => {
     <Container >
       
         {product?.map((item, index) => {
+          const handleCart=async()=>{
+            alert('Product Add Successfully')
+            await addDoc(collection(db, "CartProducts"), {
+              name: item.name,
+              image: item.image,
+              price: item.price,
+              desc:item.desc,
+              category:item.category,
+              quantity: 1,
+              totalPrice:item.price
+            });
+            dispatch(cartProducts())
+        }
           return (
             <Row className='my-5' key={index}>
               <Col md={6} >
@@ -26,8 +41,8 @@ const SingleProduct = () => {
                   </Card.Text>
                   
                   <h5 className='my-3'>Price : ${item.price}</h5>
-                  <Button variant="success " className='my-3' onClick={() => {return(dispatch(addtocart({id:item.id, name:item.name, image:item.image, price:item.price, desc:item.desc,quantity:1,totalPrice:item.price})), alert('Product Add Successfully') ) }
-            } >Add to Cart</Button>
+                  <Button variant="success " className='my-3' onClick={() => handleCart()}
+             >Add to Cart</Button>
                 </Card.Body>
               </Card>
             </Col>

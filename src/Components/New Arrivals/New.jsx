@@ -5,24 +5,28 @@ import { RiStarSLine } from 'react-icons/ri'
 import Carouselbar from '../Products/Carouselbar';
 import Loading from '../Loading/Loading';
 import './style.css'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { singleProduct } from '../../Features/ProductSlice';
+import { Link } from 'react-router-dom';
 const New = () => {
     const products = useSelector(state => state.products.allProducts).slice(0,8);
     const loading=useSelector(state=>state.products.loading);
+    const dispatch=useDispatch();
     return (
         <div className='container'>
             <Carouselbar title={'New Arrivals'} />
 
             {!loading? <div className="d-flex flex-wrap justify-content-center gap-md-3 gap-lg-1 pt-3" >
-                {products.map((item) => {
+                {products?.map((item) => {
                     return (
                         <div className='mt-1 arrivals' >
-                            <div className="row">
-                                <div className="col-md-3 pt-2">
+                            <Link to={`/${item.id}`} className='link'>
+                            <div className="row" onClick={() => dispatch(singleProduct(item.id))}>
+                                <div className="col-md-3">
                                     <img src={item.image} alt="" />
                                 </div>
-                                <div className="col-md-9 px-4 py-3">
-                                    <h6 >{item.name.slice(0,40)}</h6>
+                                <div className="col-md-9 px-4 ">
+                                    <h6 className='pt-2'>{item.name.slice(0,40)}</h6>
                                     <div className="d-flex justify-content-between reviews" >
                                         <div className="icons">
                                             <LiaStarSolid />
@@ -36,6 +40,8 @@ const New = () => {
                                     <h6 >${item.price}</h6>
                                 </div>
                             </div>
+                            </Link>
+                            
                         </div>
                     )
                 })}

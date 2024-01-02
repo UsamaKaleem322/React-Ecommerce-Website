@@ -15,18 +15,6 @@ export const cartSlice = createSlice({
       state.cartProducts = action.payload;
       state.loading = false;
     },
-    addtocart:async (state, action) => {
-      const product = action.payload;
-      await addDoc(collection(db, "CartProducts"), {
-        name: product.name,
-        image: product.image,
-        price: product.price,
-        desc: product.desc,
-        quantity: 1,
-        totalPrice: product.price
-      });
-      window.location.reload()
-    },
     incrementCartProduct : async (state, action) => {
       const product=action.payload;
       const docref = doc(db, 'CartProducts', product.id);
@@ -77,5 +65,5 @@ const getCartProducts = (allProducts) => ({
 //   state.totalPrice += productPrice;
 // };
 
-export const { addtocart, removeFromcart ,incrementCartProduct} = cartSlice.actions;
+export const { removeFromcart ,incrementCartProduct} = cartSlice.actions;
 export default cartSlice.reducer;
