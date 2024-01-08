@@ -52,7 +52,6 @@ function Signup() {
           <Link to={'/signin'}>
             <button className='btn  btn-dark  mt-1'>Sign In</button>
           </Link>
-
         </Col>
       </Row>
       </div>

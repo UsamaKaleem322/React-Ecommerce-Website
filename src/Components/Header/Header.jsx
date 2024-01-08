@@ -5,16 +5,18 @@ import { MDBBadge } from 'mdb-react-ui-kit';
 import { FaHeart } from "react-icons/fa6";
 import './Style.css'
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../../Firebase/Firebase-config';
 import { signOut } from 'firebase/auth'
 import { useState } from 'react';
+import { cartProducts } from '../../Features/CartSlice';
+import { useEffect } from 'react';
+
 function Header() {
   const navigate=useNavigate();
   const Logout = () => {
-    signOut(auth);
-    navigate('/signin');
-    window.location.reload()
+      signOut(auth);
+      navigate('/signin');
   }
   const cartProducts = useSelector(state => state.cart.cartProducts)
   const totalQuantity=cartProducts?.reduce((total,product)=>{

@@ -19,9 +19,9 @@ const CardProduct = ({id, name, image, desc, price ,category}) => {
 
   const handleCart=async()=>{
     const existing=allCartProducts?.find(item=>item.productId==id)
+    alert('Product Add Successfully')
     if(existing){
       const docRef=doc(db,'CartProducts',existing.id);
-      alert('1 Product Quantity Inscrease')
       await updateDoc(docRef,{
         quantity:existing?.quantity+1,
         totalPrice:existing?.totalPrice+price
@@ -38,7 +38,6 @@ const CardProduct = ({id, name, image, desc, price ,category}) => {
         quantity: 1,
         totalPrice:price
       });
-      alert('Product Add Successfully')
     }
     dispatch(cartProducts())
       

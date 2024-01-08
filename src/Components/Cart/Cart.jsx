@@ -55,7 +55,6 @@ const Cart = () => {
 
                       {!loading ?
                         allCartProducts?.map( (product) => {
-
                           const removeFromcart = async () => {
                             if (product.quantity>1) {
                               const docRef = doc(db, 'CartProducts', product.id);

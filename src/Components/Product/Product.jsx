@@ -8,24 +8,36 @@ import { cartProducts } from '../../Features/CartSlice';
 const SingleProduct = () => {
   const product = useSelector(state => state.products.product)
   const dispatch=useDispatch();
-
+  const allCartProducts=useSelector(state=>state.cart.cartProducts)
   return (
     <Container >
       
         {product?.map((item, index) => {
           const handleCart=async()=>{
-            alert('Product Add Successfully')
-            await addDoc(collection(db, "CartProducts"), {
-              name: item.name,
-              image: item.image,
-              price: item.price,
-              desc:item.desc,
-              category:item.category,
-              quantity: 1,
-              totalPrice:item.price
-            });
+            const existing=allCartProducts?.find(item=>item.productId==id)
+            if(existing){
+              const docRef=doc(db,'CartProducts',existing.id);
+              await updateDoc(docRef,{
+                quantity:existing?.quantity+1,
+                totalPrice:existing?.totalPrice+price
+              })      
+            }
+            else{
+              await addDoc(collection(db, "CartProducts"), {
+                productId:id,
+                name: name,
+                image: image,
+                price: price,
+                desc:desc,
+                category:category,
+                quantity: 1,
+                totalPrice:price
+              });
+            }
+            alert('Product Added Successfully')
             dispatch(cartProducts())
-        }
+              
+          }
           return (
             <Row className='my-5' key={index}>
               <Col md={6} >

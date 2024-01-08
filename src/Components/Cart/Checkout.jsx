@@ -46,10 +46,12 @@ const Checkout = () => {
 
     CartProducts.map(async (product) => {
       const docRef = doc(db, 'CartProducts', product.id);
-      await deleteDoc(docRef)
+      deleteDoc(docRef)
     })
-    dispatch(cartProducts())
     navigate('/shop')
+    setTimeout(()=>{
+      dispatch(cartProducts());
+    },500)
   }
 
   return (

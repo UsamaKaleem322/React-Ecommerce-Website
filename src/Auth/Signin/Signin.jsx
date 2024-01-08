@@ -42,41 +42,6 @@ function Signin() {
       </Row>
       </div>
     </div>
-    //   <Container className='signin-form my-5'>
-    //   <form onSubmit={e=>handleSubmit(e)}>
-    //     <h3>Sign In</h3>
-    //   <MDBInput className='my-4' name='email' type='email' id='form2Example1' placeholder='Email Address....' />
-    //   <MDBInput className='mb-4' name='password' type='password' id='form2Example2' placeholder='Password....'/>
-
-    //   <MDBRow className='mb-4'>
-
-    //     <MDBCol>
-    //       <Link style={{textDecoration:'none'}} >Forgot Password</Link>
-    //     </MDBCol>
-    //   </MDBRow>
-
-    //   <MDBBtn type='submit' className='mb-4' block>
-    //     Sign in
-    //   </MDBBtn>
-
-    //   <div className='text-center'>
-    //     <p>
-    //       Not a member? <Link style={{textDecoration:'none'}} to={'/signup'}>Sign Up</Link>
-    //     </p>
-    //     <p>Or Sign Up With</p>
-
-
-    //     <button className=' btn btn-sm btn-outline-danger  mx-1 pb-2' style={{fontSize:'16px', borderRadius:'50px'}}>
-    //       <FaGoogle />
-    //     </button>
-
-    //     <button className=' btn btn-sm btn-outline-primary  mx-1 pb-2' style={{fontSize:'20px', borderRadius:'50px'}}>
-    //       <RiFacebookBoxLine />
-    //     </button>
-
-    //   </div>
-    // </form>
-    // </Container>
   );
 }
 
